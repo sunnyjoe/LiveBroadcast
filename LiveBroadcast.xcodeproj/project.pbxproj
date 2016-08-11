@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		0F27C8531D5AC0BA00AA8987 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F27C8521D5AC0BA00AA8987 /* main.m */; };
 		0F27C8561D5AC0BA00AA8987 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F27C8551D5AC0BA00AA8987 /* AppDelegate.m */; };
-		0F27C8591D5AC0BA00AA8987 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0F27C8581D5AC0BA00AA8987 /* ViewController.mm */; };
+		0F27C8591D5AC0BA00AA8987 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F27C8581D5AC0BA00AA8987 /* ViewController.m */; };
 		0F27C85C1D5AC0BA00AA8987 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F27C85A1D5AC0BA00AA8987 /* Main.storyboard */; };
 		0F27C85E1D5AC0BA00AA8987 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F27C85D1D5AC0BA00AA8987 /* Assets.xcassets */; };
 		0F27C8611D5AC0BA00AA8987 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F27C85F1D5AC0BA00AA8987 /* LaunchScreen.storyboard */; };
@@ -56,7 +56,7 @@
 		6D43FEF01D5C1E08008A1FC7 /* KFRecordButtonStart@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D43FEC11D5C1E08008A1FC7 /* KFRecordButtonStart@2x.png */; };
 		6D43FEF11D5C1E08008A1FC7 /* KFRecordButtonStop@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D43FEC21D5C1E08008A1FC7 /* KFRecordButtonStop@2x.png */; };
 		6D43FEF21D5C1E08008A1FC7 /* KFStreamTableViewCellDots@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D43FEC31D5C1E08008A1FC7 /* KFStreamTableViewCellDots@2x.png */; };
-		6D43FEF31D5C1E08008A1FC7 /* KFAWSCredentialsProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D43FEC61D5C1E08008A1FC7 /* KFAWSCredentialsProvider.m */; };
+		6D43FEF31D5C1E08008A1FC7 /* KFAWSCredentialsProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D43FEC61D5C1E08008A1FC7 /* KFAWSCredentialsProvider.m */; settings = {COMPILER_FLAGS = "-ObjC"; }; };
 		6D43FEF41D5C1E08008A1FC7 /* KFDateUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D43FEC81D5C1E08008A1FC7 /* KFDateUtils.m */; };
 		6D43FEF51D5C1E08008A1FC7 /* KFBroadcastViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D43FECC1D5C1E08008A1FC7 /* KFBroadcastViewController.m */; };
 		6D43FEF61D5C1E08008A1FC7 /* KFLiveBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D43FECE1D5C1E08008A1FC7 /* KFLiveBannerView.m */; };
@@ -72,7 +72,7 @@
 		0F27C8541D5AC0BA00AA8987 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		0F27C8551D5AC0BA00AA8987 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		0F27C8571D5AC0BA00AA8987 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		0F27C8581D5AC0BA00AA8987 /* ViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
+		0F27C8581D5AC0BA00AA8987 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		0F27C85B1D5AC0BA00AA8987 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0F27C85D1D5AC0BA00AA8987 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = LiveBroadcast/Assets.xcassets; sourceTree = "<group>"; };
 		0F27C8601D5AC0BA00AA8987 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -311,7 +311,7 @@
 			isa = PBXGroup;
 			children = (
 				0F27C8571D5AC0BA00AA8987 /* ViewController.h */,
-				0F27C8581D5AC0BA00AA8987 /* ViewController.mm */,
+				0F27C8581D5AC0BA00AA8987 /* ViewController.m */,
 				0F27C8511D5AC0BA00AA8987 /* Supporting Files */,
 			);
 			path = LiveBroadcast;
@@ -861,7 +861,7 @@
 			files = (
 				6D43FEE21D5C1E08008A1FC7 /* VideoEncoder.m in Sources */,
 				6D43FEE81D5C1E08008A1FC7 /* KFHLSManifestGenerator.m in Sources */,
-				0F27C8591D5AC0BA00AA8987 /* ViewController.mm in Sources */,
+				0F27C8591D5AC0BA00AA8987 /* ViewController.m in Sources */,
 				6D43FEE41D5C1E08008A1FC7 /* KFVideoFrame.m in Sources */,
 				6D43FEF31D5C1E08008A1FC7 /* KFAWSCredentialsProvider.m in Sources */,
 				6D43FEE01D5C1E08008A1FC7 /* MP4Atom.m in Sources */,

@@ -51,16 +51,16 @@ PODS:
   - SSKeychain (1.4.1)
 
 DEPENDENCIES:
-  - AFNetworking (~> 2.2)
-  - AFOAuth2Manager (~> 2.0)
-  - AWSS3 (~> 2.1)
+  - AFNetworking
+  - AFOAuth2Manager
+  - AWSS3
   - CocoaLumberjack
-  - FFmpegWrapper (~> 1.0)
-  - FormatterKit/TimeIntervalFormatter (~> 1.4)
-  - Mantle (~> 1.4)
+  - FFmpegWrapper
+  - FormatterKit/TimeIntervalFormatter
+  - Mantle
   - PureLayout (~> 2.0)
-  - SDWebImage (~> 3.6)
-  - SSKeychain (~> 1.2)
+  - SDWebImage
+  - SSKeychain
 
 SPEC CHECKSUMS:
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
@@ -76,6 +76,6 @@ SPEC CHECKSUMS:
   SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
   SSKeychain: 55cc80f66f5c73da827e3077f02e43528897db41
 
-PODFILE CHECKSUM: 40f52ff5ebda414ca2a111ff9fbdcf6220d56dea
+PODFILE CHECKSUM: 595801e07c9507486270e19f87f44c4436975b04
 
 COCOAPODS: 1.0.1

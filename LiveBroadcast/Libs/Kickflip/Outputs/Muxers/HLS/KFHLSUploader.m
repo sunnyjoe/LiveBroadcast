@@ -65,6 +65,7 @@ static NSString * const kKFS3Key = @"kKFS3Key";
         
         AWSRegionType region = [KFAWSCredentialsProvider regionTypeForRegion:stream.awsRegion];
         KFAWSCredentialsProvider *awsCredentialsProvider = [[KFAWSCredentialsProvider alloc] initWithStream:stream];
+        
         AWSServiceConfiguration *configuration = [[AWSServiceConfiguration alloc] initWithRegion:region
                                                                              credentialsProvider:awsCredentialsProvider];
         

@@ -7,14 +7,14 @@ target 'LiveBroadcast' do
 
   # Pods for LiveBroadcast
   pod 'CocoaLumberjack'
-  pod 'AFNetworking', '~> 2.2'
-  pod 'AWSS3', '~> 2.1'
-  pod 'AFOAuth2Manager', '~> 2.0'
-  pod 'SSKeychain', '~> 1.2'
-  pod 'FFmpegWrapper', '~> 1.0'
+  pod 'AFNetworking'
+  pod 'AWSS3'
+  pod 'AFOAuth2Manager'
+  pod 'SSKeychain'
+  pod 'FFmpegWrapper'
   pod 'PureLayout', '~> 2.0'
-  pod 'Mantle', '~> 1.4'
-  pod 'SDWebImage', '~> 3.6'
-  pod 'FormatterKit/TimeIntervalFormatter', '~> 1.4'
+  pod 'Mantle'
+  pod 'SDWebImage'
+  pod 'FormatterKit/TimeIntervalFormatter' 
 
 end
