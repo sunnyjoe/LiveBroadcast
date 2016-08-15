@@ -20,7 +20,6 @@ __attribute__ ((noinline)) void awsbf_warnBlockingOperationOnMainThread() {
 }
 
 NSString *const AWSTaskErrorDomain = @"bolts";
-NSInteger const kAWSMultipleErrorsError = 80175001;
 NSString *const AWSTaskMultipleExceptionsException = @"AWSMultipleExceptionsException";
 
 @interface AWSTask () {
@@ -29,9 +28,9 @@ NSString *const AWSTaskMultipleExceptionsException = @"AWSMultipleExceptionsExce
     NSException *_exception;
 }
 
-@property (nonatomic, assign, readwrite, getter=isCancelled) BOOL cancelled;
-@property (nonatomic, assign, readwrite, getter=isFaulted) BOOL faulted;
-@property (nonatomic, assign, readwrite, getter=isCompleted) BOOL completed;
+@property (atomic, assign, readwrite, getter=isCancelled) BOOL cancelled;
+@property (atomic, assign, readwrite, getter=isFaulted) BOOL faulted;
+@property (atomic, assign, readwrite, getter=isCompleted) BOOL completed;
 
 @property (nonatomic, strong) NSObject *lock;
 @property (nonatomic, strong) NSCondition *condition;
@@ -108,7 +107,7 @@ NSString *const AWSTaskMultipleExceptionsException = @"AWSMultipleExceptionsExce
     return [[self alloc] initCancelled];
 }
 
-+ (instancetype)taskForCompletionOfAllTasks:(NSArray<AWSTask *> *)tasks {
++ (instancetype)taskForCompletionOfAllTasks:(NSArray *)tasks {
     __block int32_t total = (int32_t)tasks.count;
     if (total == 0) {
         return [self taskWithResult:nil];
@@ -166,7 +165,7 @@ NSString *const AWSTaskMultipleExceptionsException = @"AWSMultipleExceptionsExce
     return tcs.task;
 }
 
-+ (instancetype)taskForCompletionOfAllTasksWithResults:(NSArray<AWSTask *> *)tasks {
++ (instancetype)taskForCompletionOfAllTasksWithResults:(NSArray *)tasks {
     return [[self taskForCompletionOfAllTasks:tasks] continueWithSuccessBlock:^id(AWSTask *task) {
         return [tasks valueForKey:@"result"];
     }];
@@ -199,7 +198,8 @@ NSString *const AWSTaskMultipleExceptionsException = @"AWSMultipleExceptionsExce
     return tcs.task;
 }
 
-+ (instancetype)taskFromExecutor:(AWSExecutor *)executor withBlock:(nullable id (^)())block {
++ (instancetype)taskFromExecutor:(AWSExecutor *)executor
+                       withBlock:(id (^)())block {
     return [[self taskWithResult:nil] continueWithExecutor:executor withBlock:^id(AWSTask *task) {
         return block();
     }];

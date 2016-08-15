@@ -24,6 +24,18 @@
 		0F27C9101D5B3C8100AA8987 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F27C90F1D5B3C8100AA8987 /* libz.tbd */; };
 		0F27C9121D5B3CA300AA8987 /* libbz2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F27C9111D5B3CA300AA8987 /* libbz2.tbd */; };
 		0F27C9141D5B3CA800AA8987 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F27C9131D5B3CA800AA8987 /* libiconv.tbd */; };
+		5BD29818C0A32FE8FBAF91BD /* libPods-LiveBroadcast.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 863A57FF338F35D14EDACDE0 /* libPods-LiveBroadcast.a */; };
+		6D2B1D6A1D61A10E00B07F30 /* libFFmpegWrapper.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D2B1D691D61A10E00B07F30 /* libFFmpegWrapper.a */; };
+		6D2B1D751D61A11700B07F30 /* libAFNetworking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D2B1D6B1D61A11700B07F30 /* libAFNetworking.a */; };
+		6D2B1D761D61A11700B07F30 /* libAFOAuth2Manager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D2B1D6C1D61A11700B07F30 /* libAFOAuth2Manager.a */; };
+		6D2B1D771D61A11700B07F30 /* libAWSCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D2B1D6D1D61A11700B07F30 /* libAWSCore.a */; };
+		6D2B1D781D61A11700B07F30 /* libAWSS3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D2B1D6E1D61A11700B07F30 /* libAWSS3.a */; };
+		6D2B1D791D61A11700B07F30 /* libCocoaLumberjack.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D2B1D6F1D61A11700B07F30 /* libCocoaLumberjack.a */; };
+		6D2B1D7A1D61A11700B07F30 /* libFormatterKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D2B1D701D61A11700B07F30 /* libFormatterKit.a */; };
+		6D2B1D7B1D61A11700B07F30 /* libMantle.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D2B1D711D61A11700B07F30 /* libMantle.a */; };
+		6D2B1D7C1D61A11700B07F30 /* libPureLayout.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D2B1D721D61A11700B07F30 /* libPureLayout.a */; };
+		6D2B1D7D1D61A11700B07F30 /* libSDWebImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D2B1D731D61A11700B07F30 /* libSDWebImage.a */; };
+		6D2B1D7E1D61A11700B07F30 /* libSSKeychain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D2B1D741D61A11700B07F30 /* libSSKeychain.a */; };
 		6D43FED31D5C1E08008A1FC7 /* KFAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D43FE821D5C1E08008A1FC7 /* KFAPIClient.m */; };
 		6D43FED41D5C1E08008A1FC7 /* KFPaginationInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D43FE841D5C1E08008A1FC7 /* KFPaginationInfo.m */; };
 		6D43FED51D5C1E08008A1FC7 /* KFRTMPStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D43FE861D5C1E08008A1FC7 /* KFRTMPStream.m */; };
@@ -63,7 +75,6 @@
 		6D43FEF71D5C1E08008A1FC7 /* KFRecordButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D43FED01D5C1E08008A1FC7 /* KFRecordButton.m */; };
 		6D43FEF81D5C1E08008A1FC7 /* KFStreamTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D43FED21D5C1E08008A1FC7 /* KFStreamTableViewCell.m */; };
 		6D43FEFF1D5C20B3008A1FC7 /* librtmp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D43FEFE1D5C20B3008A1FC7 /* librtmp.a */; };
-		BCCF9DE8D607F40EFB417ABE /* libPods-LiveBroadcast.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E21CA239156BCAAB85F93F8E /* libPods-LiveBroadcast.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -183,7 +194,18 @@
 		0F27C90F1D5B3C8100AA8987 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		0F27C9111D5B3CA300AA8987 /* libbz2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbz2.tbd; path = usr/lib/libbz2.tbd; sourceTree = SDKROOT; };
 		0F27C9131D5B3CA800AA8987 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
-		4A1C95484A7F5CED367F02D8 /* Pods-LiveBroadcast.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiveBroadcast.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LiveBroadcast/Pods-LiveBroadcast.debug.xcconfig"; sourceTree = "<group>"; };
+		1C586D74086C55E06D30CF34 /* Pods-LiveBroadcast.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiveBroadcast.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LiveBroadcast/Pods-LiveBroadcast.debug.xcconfig"; sourceTree = "<group>"; };
+		6D2B1D691D61A10E00B07F30 /* libFFmpegWrapper.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFFmpegWrapper.a; path = "../Library/Developer/Xcode/DerivedData/LiveBroadcast-gxlxrmcnmphzeddsrvnmrrevdfjc/Build/Products/Debug-iphoneos/FFmpegWrapper/libFFmpegWrapper.a"; sourceTree = "<group>"; };
+		6D2B1D6B1D61A11700B07F30 /* libAFNetworking.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAFNetworking.a; path = "../Library/Developer/Xcode/DerivedData/LiveBroadcast-gxlxrmcnmphzeddsrvnmrrevdfjc/Build/Products/Debug-iphoneos/AFNetworking/libAFNetworking.a"; sourceTree = "<group>"; };
+		6D2B1D6C1D61A11700B07F30 /* libAFOAuth2Manager.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAFOAuth2Manager.a; path = "../Library/Developer/Xcode/DerivedData/LiveBroadcast-gxlxrmcnmphzeddsrvnmrrevdfjc/Build/Products/Debug-iphoneos/AFOAuth2Manager/libAFOAuth2Manager.a"; sourceTree = "<group>"; };
+		6D2B1D6D1D61A11700B07F30 /* libAWSCore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAWSCore.a; path = "../Library/Developer/Xcode/DerivedData/LiveBroadcast-gxlxrmcnmphzeddsrvnmrrevdfjc/Build/Products/Debug-iphoneos/AWSCore/libAWSCore.a"; sourceTree = "<group>"; };
+		6D2B1D6E1D61A11700B07F30 /* libAWSS3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAWSS3.a; path = "../Library/Developer/Xcode/DerivedData/LiveBroadcast-gxlxrmcnmphzeddsrvnmrrevdfjc/Build/Products/Debug-iphoneos/AWSS3/libAWSS3.a"; sourceTree = "<group>"; };
+		6D2B1D6F1D61A11700B07F30 /* libCocoaLumberjack.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libCocoaLumberjack.a; path = "../Library/Developer/Xcode/DerivedData/LiveBroadcast-gxlxrmcnmphzeddsrvnmrrevdfjc/Build/Products/Debug-iphoneos/CocoaLumberjack/libCocoaLumberjack.a"; sourceTree = "<group>"; };
+		6D2B1D701D61A11700B07F30 /* libFormatterKit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFormatterKit.a; path = "../Library/Developer/Xcode/DerivedData/LiveBroadcast-gxlxrmcnmphzeddsrvnmrrevdfjc/Build/Products/Debug-iphoneos/FormatterKit/libFormatterKit.a"; sourceTree = "<group>"; };
+		6D2B1D711D61A11700B07F30 /* libMantle.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMantle.a; path = "../Library/Developer/Xcode/DerivedData/LiveBroadcast-gxlxrmcnmphzeddsrvnmrrevdfjc/Build/Products/Debug-iphoneos/Mantle/libMantle.a"; sourceTree = "<group>"; };
+		6D2B1D721D61A11700B07F30 /* libPureLayout.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPureLayout.a; path = "../Library/Developer/Xcode/DerivedData/LiveBroadcast-gxlxrmcnmphzeddsrvnmrrevdfjc/Build/Products/Debug-iphoneos/PureLayout/libPureLayout.a"; sourceTree = "<group>"; };
+		6D2B1D731D61A11700B07F30 /* libSDWebImage.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSDWebImage.a; path = "../Library/Developer/Xcode/DerivedData/LiveBroadcast-gxlxrmcnmphzeddsrvnmrrevdfjc/Build/Products/Debug-iphoneos/SDWebImage/libSDWebImage.a"; sourceTree = "<group>"; };
+		6D2B1D741D61A11700B07F30 /* libSSKeychain.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSSKeychain.a; path = "../Library/Developer/Xcode/DerivedData/LiveBroadcast-gxlxrmcnmphzeddsrvnmrrevdfjc/Build/Products/Debug-iphoneos/SSKeychain/libSSKeychain.a"; sourceTree = "<group>"; };
 		6D43FE811D5C1E08008A1FC7 /* KFAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFAPIClient.h; sourceTree = "<group>"; };
 		6D43FE821D5C1E08008A1FC7 /* KFAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KFAPIClient.m; sourceTree = "<group>"; };
 		6D43FE831D5C1E08008A1FC7 /* KFPaginationInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KFPaginationInfo.h; sourceTree = "<group>"; };
@@ -259,8 +281,8 @@
 		6D43FEFC1D5C2099008A1FC7 /* log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = log.h; sourceTree = "<group>"; };
 		6D43FEFD1D5C2099008A1FC7 /* rtmp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtmp.h; sourceTree = "<group>"; };
 		6D43FEFE1D5C20B3008A1FC7 /* librtmp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = librtmp.a; sourceTree = "<group>"; };
-		A2421B0ABC62FB58184CDB07 /* Pods-LiveBroadcast.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiveBroadcast.release.xcconfig"; path = "Pods/Target Support Files/Pods-LiveBroadcast/Pods-LiveBroadcast.release.xcconfig"; sourceTree = "<group>"; };
-		E21CA239156BCAAB85F93F8E /* libPods-LiveBroadcast.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LiveBroadcast.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		863A57FF338F35D14EDACDE0 /* libPods-LiveBroadcast.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LiveBroadcast.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		974B7D98461A99B790F6D0E9 /* Pods-LiveBroadcast.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiveBroadcast.release.xcconfig"; path = "Pods/Target Support Files/Pods-LiveBroadcast/Pods-LiveBroadcast.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -268,6 +290,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D2B1D751D61A11700B07F30 /* libAFNetworking.a in Frameworks */,
+				6D2B1D761D61A11700B07F30 /* libAFOAuth2Manager.a in Frameworks */,
+				6D2B1D771D61A11700B07F30 /* libAWSCore.a in Frameworks */,
+				6D2B1D781D61A11700B07F30 /* libAWSS3.a in Frameworks */,
+				6D2B1D791D61A11700B07F30 /* libCocoaLumberjack.a in Frameworks */,
+				6D2B1D7A1D61A11700B07F30 /* libFormatterKit.a in Frameworks */,
+				6D2B1D7B1D61A11700B07F30 /* libMantle.a in Frameworks */,
+				6D2B1D7C1D61A11700B07F30 /* libPureLayout.a in Frameworks */,
+				6D2B1D7D1D61A11700B07F30 /* libSDWebImage.a in Frameworks */,
+				6D2B1D7E1D61A11700B07F30 /* libSSKeychain.a in Frameworks */,
+				6D2B1D6A1D61A10E00B07F30 /* libFFmpegWrapper.a in Frameworks */,
 				0F27C9141D5B3CA800AA8987 /* libiconv.tbd in Frameworks */,
 				0F27C9121D5B3CA300AA8987 /* libbz2.tbd in Frameworks */,
 				0F27C9101D5B3C8100AA8987 /* libz.tbd in Frameworks */,
@@ -280,7 +313,7 @@
 				0F27C8891D5B398A00AA8987 /* libswresample.a in Frameworks */,
 				0F27C8841D5B398A00AA8987 /* libavcodec.a in Frameworks */,
 				6D43FEFF1D5C20B3008A1FC7 /* librtmp.a in Frameworks */,
-				BCCF9DE8D607F40EFB417ABE /* libPods-LiveBroadcast.a in Frameworks */,
+				5BD29818C0A32FE8FBAF91BD /* libPods-LiveBroadcast.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,8 +327,8 @@
 				0F27C87C1D5B390000AA8987 /* Libs */,
 				0F27C84F1D5AC0BA00AA8987 /* Products */,
 				0F27C8681D5B102600AA8987 /* Resources */,
-				8F19CACD5E9A938E9B0390AE /* Pods */,
 				A96CC93CEDA00623A6A67440 /* Frameworks */,
+				1F73E11DE4DB63D0570D5807 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -521,6 +554,15 @@
 			path = libswscale;
 			sourceTree = "<group>";
 		};
+		1F73E11DE4DB63D0570D5807 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1C586D74086C55E06D30CF34 /* Pods-LiveBroadcast.debug.xcconfig */,
+				974B7D98461A99B790F6D0E9 /* Pods-LiveBroadcast.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		6D43FE7F1D5C1E08008A1FC7 /* Kickflip */ = {
 			isa = PBXGroup;
 			children = (
@@ -713,19 +755,21 @@
 			path = librtmp;
 			sourceTree = "<group>";
 		};
-		8F19CACD5E9A938E9B0390AE /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				4A1C95484A7F5CED367F02D8 /* Pods-LiveBroadcast.debug.xcconfig */,
-				A2421B0ABC62FB58184CDB07 /* Pods-LiveBroadcast.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		A96CC93CEDA00623A6A67440 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				E21CA239156BCAAB85F93F8E /* libPods-LiveBroadcast.a */,
+				6D2B1D6B1D61A11700B07F30 /* libAFNetworking.a */,
+				6D2B1D6C1D61A11700B07F30 /* libAFOAuth2Manager.a */,
+				6D2B1D6D1D61A11700B07F30 /* libAWSCore.a */,
+				6D2B1D6E1D61A11700B07F30 /* libAWSS3.a */,
+				6D2B1D6F1D61A11700B07F30 /* libCocoaLumberjack.a */,
+				6D2B1D701D61A11700B07F30 /* libFormatterKit.a */,
+				6D2B1D711D61A11700B07F30 /* libMantle.a */,
+				6D2B1D721D61A11700B07F30 /* libPureLayout.a */,
+				6D2B1D731D61A11700B07F30 /* libSDWebImage.a */,
+				6D2B1D741D61A11700B07F30 /* libSSKeychain.a */,
+				6D2B1D691D61A10E00B07F30 /* libFFmpegWrapper.a */,
+				863A57FF338F35D14EDACDE0 /* libPods-LiveBroadcast.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1004,7 +1048,7 @@
 		};
 		0F27C8661D5AC0BA00AA8987 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4A1C95484A7F5CED367F02D8 /* Pods-LiveBroadcast.debug.xcconfig */;
+			baseConfigurationReference = 1C586D74086C55E06D30CF34 /* Pods-LiveBroadcast.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1024,7 +1068,7 @@
 		};
 		0F27C8671D5AC0BA00AA8987 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A2421B0ABC62FB58184CDB07 /* Pods-LiveBroadcast.release.xcconfig */;
+			baseConfigurationReference = 974B7D98461A99B790F6D0E9 /* Pods-LiveBroadcast.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";

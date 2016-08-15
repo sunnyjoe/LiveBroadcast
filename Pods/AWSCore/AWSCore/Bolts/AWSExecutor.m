@@ -59,9 +59,7 @@ __attribute__((noinline)) static size_t remaining_stack_size(size_t *__nonnull r
             if (remainingStackSize < (totalStackSize / 10)) {
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), block);
             } else {
-                @autoreleasepool {
-                    block();
-                }
+                block();
             }
         }];
     });
@@ -87,9 +85,7 @@ __attribute__((noinline)) static size_t remaining_stack_size(size_t *__nonnull r
             if (![NSThread isMainThread]) {
                 dispatch_async(dispatch_get_main_queue(), block);
             } else {
-                @autoreleasepool {
-                    block();
-                }
+                block();
             }
         }];
     });

@@ -1,17 +1,17 @@
-//
-// Copyright 2010-2016 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License").
-// You may not use this file except in compliance with the License.
-// A copy of the License is located at
-//
-// http://aws.amazon.com/apache2.0
-//
-// or in the "license" file accompanying this file. This file is distributed
-// on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
-// express or implied. See the License for the specific language governing
-// permissions and limitations under the License.
-//
+/*
+ Copyright 2010-2015 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+
+ Licensed under the Apache License, Version 2.0 (the "License").
+ You may not use this file except in compliance with the License.
+ A copy of the License is located at
+
+ http://aws.amazon.com/apache2.0
+
+ or in the "license" file accompanying this file. This file is distributed
+ on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ express or implied. See the License for the specific language governing
+ permissions and limitations under the License.
+ */
 
 #import "AWSURLResponseSerialization.h"
 
@@ -21,7 +21,11 @@
 #import "AWSValidation.h"
 #import "AWSSerialization.h"
 
+NSString *const AWSGeneralErrorDomain = @"com.amazonaws.AWSGeneralErrorDomain";
+
 #pragma mark - Service errors
+
+static NSDictionary *errorCodeDictionary = nil;
 
 @interface AWSJSONResponseSerializer()
 
@@ -33,11 +37,21 @@
 
 @implementation AWSJSONResponseSerializer
 
++ (void)initialize {
+    errorCodeDictionary = @{
+                            @"RequestTimeTooSkewed" : @(AWSGeneralErrorRequestTimeTooSkewed),
+                            @"InvalidSignatureException" : @(AWSGeneralErrorInvalidSignatureException),
+                            @"RequestExpired" : @(AWSGeneralErrorRequestExpired),
+                            @"SignatureDoesNotMatch" : @(AWSGeneralErrorSignatureDoesNotMatch),
+                            @"AuthFailure" : @(AWSGeneralErrorAuthFailure),
+                            };
+}
+
 - (instancetype)initWithJSONDefinition:(NSDictionary *)JSONDefinition
                             actionName:(NSString *)actionName
                            outputClass:(Class)outputClass {
     if (self = [super init]) {
-
+        
         _serviceDefinitionJSON = JSONDefinition;
         if (_serviceDefinitionJSON == nil) {
             AWSLogError(@"serviceDefinitionJSON of is nil.");
@@ -56,17 +70,13 @@
                  currentRequest:(NSURLRequest *)currentRequest
                            data:(id)data
                           error:(NSError *__autoreleasing *)error {
-    if ([AWSLogger defaultLogger].logLevel >= AWSLogLevelDebug) {
-        if ([data isKindOfClass:[NSData class]]) {
-            if ([data length] <= 100 * 1024) {
-                AWSLogDebug(@"Response body:\n%@", [[NSString alloc] initWithData:data
-                                                                         encoding:NSUTF8StringEncoding]);
-            } else {
-                AWSLogDebug(@"Response body (Partial data. The first 100KB is displayed.):\n%@", [[NSString alloc] initWithData:[data subdataWithRange:NSMakeRange(0, 100 * 1024)]
-                                                                                                                       encoding:NSUTF8StringEncoding]);
+    if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
+        AWSLogDebug(@"Response header: [%@]", response.allHeaderFields);
+    }
 
-            }
-        }
+    if ([data isKindOfClass:[NSData class]]) {
+        AWSLogVerbose(@"Response body: [%@]", [[NSString alloc] initWithData:data
+                                                                    encoding:NSUTF8StringEncoding]);
     }
 
     NSString *responseContentTypeStr = [[response allHeaderFields] objectForKey:@"Content-Type"];
@@ -77,8 +87,8 @@
                 NSString *message = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 
 
-                *error = [NSError errorWithDomain:AWSServiceErrorDomain
-                                             code:AWSServiceErrorUnknown
+                *error = [NSError errorWithDomain:AWSGeneralErrorDomain
+                                             code:AWSGeneralErrorUnknown
                                          userInfo:@{NSLocalizedDescriptionKey : message?message:[NSNull null]}];
                 return nil;
             }
@@ -97,17 +107,17 @@
     //parse JSON data
     result = [AWSJSONParser dictionaryForJsonData:data response:response actionName:self.actionName serviceDefinitionRule:self.serviceDefinitionJSON error:error];
 
-    //Parse AWSServiceError
+    //Parse AWSGeneralError
     if ([result isKindOfClass:[NSDictionary class]]) {
         NSDictionary *anActionRules = [[self.serviceDefinitionJSON objectForKey:@"operations"] objectForKey:_actionName];
         NSDictionary *shapeRules = [self.serviceDefinitionJSON objectForKey:@"shapes"];
         AWSJSONDictionary *outputRules = [[AWSJSONDictionary alloc] initWithDictionary:[anActionRules objectForKey:@"output"] JSONDefinitionRule:shapeRules];
         result = [AWSXMLResponseSerializer parseResponse:response rules:outputRules bodyDictionary:[result mutableCopy] error:error];
 
-        if ([[AWSService errorCodeDictionary] objectForKey:[[[result objectForKey:@"__type"] componentsSeparatedByString:@"#"] lastObject]]) {
+        if ([errorCodeDictionary objectForKey:[[[result objectForKey:@"__type"] componentsSeparatedByString:@"#"] lastObject]]) {
             if (error) {
-                *error = [NSError errorWithDomain:AWSServiceErrorDomain
-                                             code:[[[AWSService errorCodeDictionary] objectForKey:[[[result objectForKey:@"__type"] componentsSeparatedByString:@"#"] lastObject]] integerValue]
+                *error = [NSError errorWithDomain:AWSGeneralErrorDomain
+                                             code:[[errorCodeDictionary objectForKey:[[[result objectForKey:@"__type"] componentsSeparatedByString:@"#"] lastObject]] integerValue]
                                          userInfo:result];
             }
         }
@@ -134,11 +144,21 @@
 
 @implementation AWSXMLResponseSerializer
 
++ (void)initialize {
+    errorCodeDictionary = @{
+                            @"RequestTimeTooSkewed" : @(AWSGeneralErrorRequestTimeTooSkewed),
+                            @"InvalidSignatureException" : @(AWSGeneralErrorInvalidSignatureException),
+                            @"RequestExpired" : @(AWSGeneralErrorRequestExpired),
+                            @"SignatureDoesNotMatch" : @(AWSGeneralErrorSignatureDoesNotMatch),
+                            @"AuthFailure" : @(AWSGeneralErrorAuthFailure),
+                            };
+}
+
 - (instancetype)initWithJSONDefinition:(NSDictionary *)JSONDefinition
                             actionName:(NSString *)actionName
                            outputClass:(Class)outputClass {
     if (self = [super init]) {
-
+        
         _serviceDefinitionJSON = JSONDefinition;
         if (_serviceDefinitionJSON == nil) {
             AWSLogError(@"serviceDefinitionJSON of is nil.");
@@ -165,7 +185,7 @@
                         bodyDictionary:(NSMutableDictionary *)bodyDictionary
                                  error:(NSError *__autoreleasing *)error {
     NSDictionary *responseHeaders = [response allHeaderFields];
-
+    
     //If no rule just return
     if (rules == (id)[NSNull null] ||  [rules count] == 0) {
         return bodyDictionary;
@@ -181,7 +201,7 @@
                 if ([rulesType isEqualToString:@"integer"]) {
                     bodyDictionary[memberName] = @([responseHeaders[locationName] integerValue]);
                 } else if ([rulesType isEqualToString:@"long"]) {
-                    bodyDictionary[memberName] = @([responseHeaders[locationName] longLongValue]);
+                    bodyDictionary[memberName] = @([responseHeaders[locationName] longValue]);
                 } else if ([rulesType isEqualToString:@"float"]) {
                     bodyDictionary[memberName] = @([responseHeaders[locationName] floatValue]);
                 } else if ([rulesType isEqualToString:@"double"]) {
@@ -212,7 +232,7 @@
                 }
             }
         }
-
+        
         //may also need to pass the response statusCode if the memberRule ask for it
         if (memberName && [memberRules isKindOfClass:[NSDictionary class]] && [memberRules[@"location"] isEqualToString:@"statusCode"]) {
             NSString *rulesType = memberRules[@"type"];
@@ -233,15 +253,27 @@
                  currentRequest:(NSURLRequest *)currentRequest
                            data:(id)data
                           error:(NSError *__autoreleasing *)error {
-    if ([AWSLogger defaultLogger].logLevel >= AWSLogLevelDebug) {
-        if ([data isKindOfClass:[NSData class]]) {
-            if ([data length] <= 100 * 1024) {
-                AWSLogDebug(@"Response body:\n%@", [[NSString alloc] initWithData:data
-                                                                         encoding:NSUTF8StringEncoding]);
-            } else {
-                AWSLogDebug(@"Response body (Partial data. The first 100KB is displayed.):\n%@", [[NSString alloc] initWithData:[data subdataWithRange:NSMakeRange(0, 100 * 1024)]
-                                                                                                                       encoding:NSUTF8StringEncoding]);
+    if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
+        AWSLogDebug(@"Response header: [%@]", response.allHeaderFields);
+    }
 
+    if ([data isKindOfClass:[NSData class]]) {
+        AWSLogVerbose(@"Response body: [%@]", [[NSString alloc] initWithData:data
+                                                                    encoding:NSUTF8StringEncoding]);
+    }
+
+    NSString *responseContentTypeStr = [[response allHeaderFields] objectForKey:@"Content-Type"];
+    if (responseContentTypeStr) {
+        if ([responseContentTypeStr rangeOfString:@"text/html"].location != NSNotFound) {
+            //found html response rather than xml format. should be an error.
+            if (error) {
+                NSString *message = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+
+
+                *error = [NSError errorWithDomain:AWSGeneralErrorDomain
+                                             code:AWSGeneralErrorUnknown
+                                         userInfo:@{NSLocalizedDescriptionKey : message?message:[NSNull null]}];
+                return nil;
             }
         }
     }
@@ -249,20 +281,17 @@
     if (![self validateResponse:response fromRequest:currentRequest data:data error:error]) {
         return nil;
     }
-
     NSDictionary *anActionRules = [[self.serviceDefinitionJSON objectForKey:@"operations"] objectForKey:self.actionName];
     NSDictionary *shapeRules = [self.serviceDefinitionJSON objectForKey:@"shapes"];
     AWSJSONDictionary *outputRules = [[AWSJSONDictionary alloc] initWithDictionary:[anActionRules objectForKey:@"output"] JSONDefinitionRule:shapeRules];
 
+
     NSMutableDictionary *resultDic = [NSMutableDictionary new];
 
-    // There is a small edge case where S3 returns a 200 response for an error.
-    // http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectCOPY.html
-    if (response.statusCode / 100 == 2
-        && ![originalRequest.HTTPMethod isEqualToString:@"PUT"]) {
-        // status is good and it's not a PUT request, we can keep NSURL as data
+    if (response.statusCode >= 200 && response.statusCode < 300 ) {
+        // status is good, we can keep NSURL as data
     } else {
-        //if status error indicates error or it's a PUT request, need to convert NSURL to NSData for error processing
+        //if status error indicates error, need to convert NSURL to NSData for error processing
         if ([data isKindOfClass:[NSURL class]]) {
             data = [NSData dataWithContentsOfFile:[(NSURL *)data path]];
         }
@@ -279,13 +308,13 @@
     //parse response header
     resultDic = [AWSXMLResponseSerializer parseResponse:response rules:outputRules bodyDictionary:resultDic error:error];
 
-    //Parse AWSServiceError
+    //Parse AWSGeneralError
     NSDictionary *errorInfo = resultDic[@"Error"];
     if (errorInfo) {
-        if (errorInfo[@"Code"] && [AWSService errorCodeDictionary][errorInfo[@"Code"]]) {
+        if (errorInfo[@"Code"] && errorCodeDictionary[errorInfo[@"Code"]]) {
             if (error && (*error == nil)) {
-                *error = [NSError errorWithDomain:AWSServiceErrorDomain
-                                             code:[[AWSService errorCodeDictionary][errorInfo[@"Code"]] integerValue]
+                *error = [NSError errorWithDomain:AWSGeneralErrorDomain
+                                             code:[errorCodeDictionary[errorInfo[@"Code"]] integerValue]
                                          userInfo:errorInfo
                           ];
             }

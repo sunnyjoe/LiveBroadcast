@@ -22,9 +22,9 @@ PODS:
     - AFNetworking/NSURLSession
   - AFOAuth2Manager (2.2.0):
     - AFNetworking/NSURLConnection (~> 2.2)
-  - AWSCore (2.4.7)
-  - AWSS3 (2.4.7):
-    - AWSCore (= 2.4.7)
+  - AWSCore (2.3.2)
+  - AWSS3 (2.3.2):
+    - AWSCore (= 2.3.2)
   - CocoaLumberjack (2.3.0):
     - CocoaLumberjack/Default (= 2.3.0)
     - CocoaLumberjack/Extensions (= 2.3.0)
@@ -52,8 +52,8 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking
-  - AFOAuth2Manager
-  - AWSS3
+  - AFOAuth2Manager (= 2.2.0)
+  - AWSS3 (= 2.3.2)
   - CocoaLumberjack
   - FFmpegWrapper
   - FormatterKit/TimeIntervalFormatter
@@ -65,8 +65,8 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
   AFOAuth2Manager: 952eb62e8fd8022971e64c6e8fe28b9e999224af
-  AWSCore: 9a729a3c0050a51ece3547d546c327acdac7838a
-  AWSS3: 0f3c8ed11e04cd78cf86ed396c06330ab142db7a
+  AWSCore: c2f69975fd2caf38a10736961de28a0105cdb00c
+  AWSS3: 9ac201e7a4ad8be0b68348c77acfd100027b97af
   CocoaLumberjack: 97fab7ee5f507fe54445cca7ea80f926729cfd15
   FFmpeg: f1428c3b60b5f9e349fcd5d7878705cd7f9a26f6
   FFmpegWrapper: 9a932581137d17203e842ce942e171158336ae16
@@ -76,6 +76,6 @@ SPEC CHECKSUMS:
   SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
   SSKeychain: 55cc80f66f5c73da827e3077f02e43528897db41
 
-PODFILE CHECKSUM: 595801e07c9507486270e19f87f44c4436975b04
+PODFILE CHECKSUM: 56d45f77b510a506a9b3b013164a55bd74578ce0
 
 COCOAPODS: 1.0.1

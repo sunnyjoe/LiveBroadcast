@@ -10,7 +10,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "AWSCancellationTokenRegistration.h"
+#import <AWSCore/AWSCancellationTokenRegistration.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

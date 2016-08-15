@@ -1,17 +1,17 @@
-//
-// Copyright 2010-2016 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License").
-// You may not use this file except in compliance with the License.
-// A copy of the License is located at
-//
-// http://aws.amazon.com/apache2.0
-//
-// or in the "license" file accompanying this file. This file is distributed
-// on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
-// express or implied. See the License for the specific language governing
-// permissions and limitations under the License.
-//
+/*
+ Copyright 2010-2015 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+
+ Licensed under the Apache License, Version 2.0 (the "License").
+ You may not use this file except in compliance with the License.
+ A copy of the License is located at
+
+ http://aws.amazon.com/apache2.0
+
+ or in the "license" file accompanying this file. This file is distributed
+ on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ express or implied. See the License for the specific language governing
+ permissions and limitations under the License.
+ */
 
 #import <Foundation/Foundation.h>
 #import <AWSCore/AWSNetworking.h>
@@ -23,19 +23,18 @@ FOUNDATION_EXPORT NSString *const AWSS3ErrorDomain;
 
 typedef NS_ENUM(NSInteger, AWSS3ErrorType) {
     AWSS3ErrorUnknown,
+    AWSS3ErrorAccessDenied,
+    AWSS3ErrorExpiredToken,
+    AWSS3ErrorInvalidAccessKeyId,
+    AWSS3ErrorInvalidToken,
+    AWSS3ErrorSignatureDoesNotMatch,
+    AWSS3ErrorTokenRefreshRequired,
     AWSS3ErrorBucketAlreadyExists,
-    AWSS3ErrorBucketAlreadyOwnedByYou,
     AWSS3ErrorNoSuchBucket,
     AWSS3ErrorNoSuchKey,
     AWSS3ErrorNoSuchUpload,
     AWSS3ErrorObjectAlreadyInActiveTier,
     AWSS3ErrorObjectNotInActiveTier,
-};
-
-typedef NS_ENUM(NSInteger, AWSS3BucketAccelerateStatus) {
-    AWSS3BucketAccelerateStatusUnknown,
-    AWSS3BucketAccelerateStatusEnabled,
-    AWSS3BucketAccelerateStatusSuspended,
 };
 
 typedef NS_ENUM(NSInteger, AWSS3BucketCannedACL) {
@@ -52,15 +51,13 @@ typedef NS_ENUM(NSInteger, AWSS3BucketLocationConstraint) {
     AWSS3BucketLocationConstraintEUWest1,
     AWSS3BucketLocationConstraintUSWest1,
     AWSS3BucketLocationConstraintUSWest2,
-    AWSS3BucketLocationConstraintAPSouth1,
     AWSS3BucketLocationConstraintAPSoutheast1,
     AWSS3BucketLocationConstraintAPSoutheast2,
     AWSS3BucketLocationConstraintAPNortheast1,
-    AWSS3BucketLocationConstraintAPNortheast2,
     AWSS3BucketLocationConstraintSAEast1,
-    AWSS3BucketLocationConstraintEUCentral1,
     AWSS3BucketLocationConstraintBlank,
     AWSS3BucketLocationConstraintCNNorth1,
+    AWSS3BucketLocationConstraintEUCentral1,
     AWSS3BucketLocationConstraintUSGovWest1,
 };
 
@@ -85,26 +82,16 @@ typedef NS_ENUM(NSInteger, AWSS3EncodingType) {
 typedef NS_ENUM(NSInteger, AWSS3Event) {
     AWSS3EventUnknown,
     AWSS3EventS3ReducedRedundancyLostObject,
-    AWSS3EventS3ObjectCreated,
     AWSS3EventS3ObjectCreatedPut,
     AWSS3EventS3ObjectCreatedPost,
     AWSS3EventS3ObjectCreatedCopy,
     AWSS3EventS3ObjectCreatedCompleteMultipartUpload,
-    AWSS3EventS3ObjectRemoved,
-    AWSS3EventS3ObjectRemovedDelete,
-    AWSS3EventS3ObjectRemovedDeleteMarkerCreated,
 };
 
 typedef NS_ENUM(NSInteger, AWSS3ExpirationStatus) {
     AWSS3ExpirationStatusUnknown,
     AWSS3ExpirationStatusEnabled,
     AWSS3ExpirationStatusDisabled,
-};
-
-typedef NS_ENUM(NSInteger, AWSS3FilterRuleName) {
-    AWSS3FilterRuleNameUnknown,
-    AWSS3FilterRuleNamePrefix,
-    AWSS3FilterRuleNameSuffix,
 };
 
 typedef NS_ENUM(NSInteger, AWSS3MFADelete) {
@@ -131,7 +118,6 @@ typedef NS_ENUM(NSInteger, AWSS3ObjectCannedACL) {
     AWSS3ObjectCannedACLPublicRead,
     AWSS3ObjectCannedACLPublicReadWrite,
     AWSS3ObjectCannedACLAuthenticatedRead,
-    AWSS3ObjectCannedACLAwsExecRead,
     AWSS3ObjectCannedACLBucketOwnerRead,
     AWSS3ObjectCannedACLBucketOwnerFullControl,
 };
@@ -169,30 +155,6 @@ typedef NS_ENUM(NSInteger, AWSS3Protocols) {
     AWSS3ProtocolsHTTPS,
 };
 
-typedef NS_ENUM(NSInteger, AWSS3ReplicationRuleStatus) {
-    AWSS3ReplicationRuleStatusUnknown,
-    AWSS3ReplicationRuleStatusEnabled,
-    AWSS3ReplicationRuleStatusDisabled,
-};
-
-typedef NS_ENUM(NSInteger, AWSS3ReplicationStatus) {
-    AWSS3ReplicationStatusUnknown,
-    AWSS3ReplicationStatusComplete,
-    AWSS3ReplicationStatusPending,
-    AWSS3ReplicationStatusFailed,
-    AWSS3ReplicationStatusReplica,
-};
-
-typedef NS_ENUM(NSInteger, AWSS3RequestCharged) {
-    AWSS3RequestChargedUnknown,
-    AWSS3RequestChargedRequester,
-};
-
-typedef NS_ENUM(NSInteger, AWSS3RequestPayer) {
-    AWSS3RequestPayerUnknown,
-    AWSS3RequestPayerRequester,
-};
-
 typedef NS_ENUM(NSInteger, AWSS3ServerSideEncryption) {
     AWSS3ServerSideEncryptionUnknown,
     AWSS3ServerSideEncryptionAES256,
@@ -203,13 +165,11 @@ typedef NS_ENUM(NSInteger, AWSS3StorageClass) {
     AWSS3StorageClassUnknown,
     AWSS3StorageClassStandard,
     AWSS3StorageClassReducedRedundancy,
-    AWSS3StorageClassStandardIa,
 };
 
 typedef NS_ENUM(NSInteger, AWSS3TransitionStorageClass) {
     AWSS3TransitionStorageClassUnknown,
     AWSS3TransitionStorageClassGlacier,
-    AWSS3TransitionStorageClassStandardIa,
 };
 
 typedef NS_ENUM(NSInteger, AWSS3Types) {
@@ -219,13 +179,9 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
     AWSS3TypesGroup,
 };
 
-@class AWSS3AbortIncompleteMultipartUpload;
-@class AWSS3AbortMultipartUploadOutput;
 @class AWSS3AbortMultipartUploadRequest;
-@class AWSS3AccelerateConfiguration;
 @class AWSS3AccessControlPolicy;
 @class AWSS3Bucket;
-@class AWSS3BucketLifecycleConfiguration;
 @class AWSS3BucketLoggingStatus;
 @class AWSS3CORSConfiguration;
 @class AWSS3CORSRule;
@@ -244,7 +200,6 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 @class AWSS3DeleteBucketCorsRequest;
 @class AWSS3DeleteBucketLifecycleRequest;
 @class AWSS3DeleteBucketPolicyRequest;
-@class AWSS3DeleteBucketReplicationRequest;
 @class AWSS3DeleteBucketRequest;
 @class AWSS3DeleteBucketTaggingRequest;
 @class AWSS3DeleteBucketWebsiteRequest;
@@ -254,29 +209,22 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 @class AWSS3DeleteObjectsOutput;
 @class AWSS3DeleteObjectsRequest;
 @class AWSS3DeletedObject;
-@class AWSS3Destination;
 @class AWSS3Error;
 @class AWSS3ErrorDocument;
-@class AWSS3FilterRule;
-@class AWSS3GetBucketAccelerateConfigurationOutput;
-@class AWSS3GetBucketAccelerateConfigurationRequest;
 @class AWSS3GetBucketAclOutput;
 @class AWSS3GetBucketAclRequest;
 @class AWSS3GetBucketCorsOutput;
 @class AWSS3GetBucketCorsRequest;
-@class AWSS3GetBucketLifecycleConfigurationOutput;
-@class AWSS3GetBucketLifecycleConfigurationRequest;
 @class AWSS3GetBucketLifecycleOutput;
 @class AWSS3GetBucketLifecycleRequest;
 @class AWSS3GetBucketLocationOutput;
 @class AWSS3GetBucketLocationRequest;
 @class AWSS3GetBucketLoggingOutput;
 @class AWSS3GetBucketLoggingRequest;
-@class AWSS3GetBucketNotificationConfigurationRequest;
+@class AWSS3GetBucketNotificationOutput;
+@class AWSS3GetBucketNotificationRequest;
 @class AWSS3GetBucketPolicyOutput;
 @class AWSS3GetBucketPolicyRequest;
-@class AWSS3GetBucketReplicationOutput;
-@class AWSS3GetBucketReplicationRequest;
 @class AWSS3GetBucketRequestPaymentOutput;
 @class AWSS3GetBucketRequestPaymentRequest;
 @class AWSS3GetBucketTaggingOutput;
@@ -298,10 +246,8 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 @class AWSS3HeadObjectRequest;
 @class AWSS3IndexDocument;
 @class AWSS3Initiator;
-@class AWSS3LambdaFunctionConfiguration;
 @class AWSS3LifecycleConfiguration;
 @class AWSS3LifecycleExpiration;
-@class AWSS3LifecycleRule;
 @class AWSS3ListBucketsOutput;
 @class AWSS3ListMultipartUploadsOutput;
 @class AWSS3ListMultipartUploadsRequest;
@@ -309,8 +255,6 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 @class AWSS3ListObjectVersionsRequest;
 @class AWSS3ListObjectsOutput;
 @class AWSS3ListObjectsRequest;
-@class AWSS3ListObjectsV2Output;
-@class AWSS3ListObjectsV2Request;
 @class AWSS3ListPartsOutput;
 @class AWSS3ListPartsRequest;
 @class AWSS3LoggingEnabled;
@@ -318,33 +262,25 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 @class AWSS3NoncurrentVersionExpiration;
 @class AWSS3NoncurrentVersionTransition;
 @class AWSS3NotificationConfiguration;
-@class AWSS3NotificationConfigurationDeprecated;
-@class AWSS3NotificationConfigurationFilter;
 @class AWSS3Object;
 @class AWSS3ObjectIdentifier;
 @class AWSS3ObjectVersion;
 @class AWSS3Owner;
 @class AWSS3Part;
-@class AWSS3PutBucketAccelerateConfigurationRequest;
 @class AWSS3PutBucketAclRequest;
 @class AWSS3PutBucketCorsRequest;
-@class AWSS3PutBucketLifecycleConfigurationRequest;
 @class AWSS3PutBucketLifecycleRequest;
 @class AWSS3PutBucketLoggingRequest;
-@class AWSS3PutBucketNotificationConfigurationRequest;
 @class AWSS3PutBucketNotificationRequest;
 @class AWSS3PutBucketPolicyRequest;
-@class AWSS3PutBucketReplicationRequest;
 @class AWSS3PutBucketRequestPaymentRequest;
 @class AWSS3PutBucketTaggingRequest;
 @class AWSS3PutBucketVersioningRequest;
 @class AWSS3PutBucketWebsiteRequest;
-@class AWSS3PutObjectAclOutput;
 @class AWSS3PutObjectAclRequest;
 @class AWSS3PutObjectOutput;
 @class AWSS3PutObjectRequest;
 @class AWSS3QueueConfiguration;
-@class AWSS3QueueConfigurationDeprecated;
 @class AWSS3Redirect;
 @class AWSS3RedirectAllRequestsTo;
 @class AWSS3Remove;
@@ -352,20 +288,15 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 @class AWSS3ReplicateObjectRequest;
 @class AWSS3ReplicateObjectResult;
 @class AWSS3ReplicatePartResult;
-@class AWSS3ReplicationConfiguration;
-@class AWSS3ReplicationRule;
 @class AWSS3RequestPaymentConfiguration;
-@class AWSS3RestoreObjectOutput;
 @class AWSS3RestoreObjectRequest;
 @class AWSS3RestoreRequest;
 @class AWSS3RoutingRule;
 @class AWSS3Rule;
-@class AWSS3S3KeyFilter;
 @class AWSS3Tag;
 @class AWSS3Tagging;
 @class AWSS3TargetGrant;
 @class AWSS3TopicConfiguration;
-@class AWSS3TopicConfigurationDeprecated;
 @class AWSS3Transition;
 @class AWSS3UploadPartCopyOutput;
 @class AWSS3UploadPartCopyRequest;
@@ -373,32 +304,6 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 @class AWSS3UploadPartRequest;
 @class AWSS3VersioningConfiguration;
 @class AWSS3WebsiteConfiguration;
-
-/**
- Specifies the days since the initiation of an Incomplete Multipart Upload that Lifecycle will wait before permanently removing all parts of the upload.
- */
-@interface AWSS3AbortIncompleteMultipartUpload : AWSModel
-
-
-/**
- Indicates the number of days that must pass since initiation for Lifecycle to abort an Incomplete Multipart Upload.
- */
-@property (nonatomic, strong) NSNumber * _Nullable daysAfterInitiation;
-
-@end
-
-/**
- 
- */
-@interface AWSS3AbortMultipartUploadOutput : AWSModel
-
-
-/**
- If present, indicates that the requester was successfully charged for the request.
- */
-@property (nonatomic, assign) AWSS3RequestCharged requestCharged;
-
-@end
 
 /**
  
@@ -417,27 +322,9 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 @property (nonatomic, strong) NSString * _Nullable key;
 
 /**
- Confirms that the requester knows that she or he will be charged for the request. Bucket owners need not specify this parameter in their requests. Documentation on downloading objects from requester pays buckets can be found at http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
- */
-@property (nonatomic, assign) AWSS3RequestPayer requestPayer;
-
-/**
  
  */
 @property (nonatomic, strong) NSString * _Nullable uploadId;
-
-@end
-
-/**
- 
- */
-@interface AWSS3AccelerateConfiguration : AWSModel
-
-
-/**
- The accelerate configuration of the bucket.
- */
-@property (nonatomic, assign) AWSS3BucketAccelerateStatus status;
 
 @end
 
@@ -450,7 +337,7 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 /**
  A list of grants.
  */
-@property (nonatomic, strong) NSArray<AWSS3Grant *> * _Nullable grants;
+@property (nonatomic, strong) NSArray * _Nullable grants;
 
 /**
  
@@ -480,19 +367,6 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 /**
  
  */
-@interface AWSS3BucketLifecycleConfiguration : AWSModel
-
-
-/**
- 
- */
-@property (nonatomic, strong) NSArray<AWSS3LifecycleRule *> * _Nullable rules;
-
-@end
-
-/**
- 
- */
 @interface AWSS3BucketLoggingStatus : AWSModel
 
 
@@ -512,7 +386,7 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 /**
  
  */
-@property (nonatomic, strong) NSArray<AWSS3CORSRule *> * _Nullable CORSRules;
+@property (nonatomic, strong) NSArray * _Nullable CORSRules;
 
 @end
 
@@ -525,22 +399,22 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 /**
  Specifies which headers are allowed in a pre-flight OPTIONS request.
  */
-@property (nonatomic, strong) NSArray<NSString *> * _Nullable allowedHeaders;
+@property (nonatomic, strong) NSArray * _Nullable allowedHeaders;
 
 /**
  Identifies HTTP methods that the domain/origin specified in the rule is allowed to execute.
  */
-@property (nonatomic, strong) NSArray<NSString *> * _Nullable allowedMethods;
+@property (nonatomic, strong) NSArray * _Nullable allowedMethods;
 
 /**
  One or more origins you want customers to be able to access the bucket from.
  */
-@property (nonatomic, strong) NSArray<NSString *> * _Nullable allowedOrigins;
+@property (nonatomic, strong) NSArray * _Nullable allowedOrigins;
 
 /**
  One or more headers in the response that you want customers to be able to access from their applications (for example, from a JavaScript XMLHttpRequest object).
  */
-@property (nonatomic, strong) NSArray<NSString *> * _Nullable exposeHeaders;
+@property (nonatomic, strong) NSArray * _Nullable exposeHeaders;
 
 /**
  The time in seconds that your browser is to cache the preflight response for the specified resource.
@@ -561,17 +435,17 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 @property (nonatomic, strong) NSString * _Nullable cloudFunction;
 
 /**
- Bucket event for which to send notifications.
+ 
  */
 @property (nonatomic, assign) AWSS3Event event;
 
 /**
  
  */
-@property (nonatomic, strong) NSArray<NSString *> * _Nullable events;
+@property (nonatomic, strong) NSArray * _Nullable events;
 
 /**
- Optional unique identifier for configurations in a notification configuration. If you don't provide one, Amazon S3 will assign an ID.
+ 
  */
 @property (nonatomic, strong) NSString * _Nullable identifier;
 
@@ -627,11 +501,6 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 @property (nonatomic, strong) NSString * _Nullable location;
 
 /**
- If present, indicates that the requester was successfully charged for the request.
- */
-@property (nonatomic, assign) AWSS3RequestCharged requestCharged;
-
-/**
  If present, specifies the ID of the AWS Key Management Service (KMS) master encryption key that was used for the object.
  */
 @property (nonatomic, strong) NSString * _Nullable SSEKMSKeyId;
@@ -670,11 +539,6 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 @property (nonatomic, strong) AWSS3CompletedMultipartUpload * _Nullable multipartUpload;
 
 /**
- Confirms that the requester knows that she or he will be charged for the request. Bucket owners need not specify this parameter in their requests. Documentation on downloading objects from requester pays buckets can be found at http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
- */
-@property (nonatomic, assign) AWSS3RequestPayer requestPayer;
-
-/**
  
  */
 @property (nonatomic, strong) NSString * _Nullable uploadId;
@@ -690,7 +554,7 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 /**
  
  */
-@property (nonatomic, strong) NSArray<AWSS3CompletedPart *> * _Nullable parts;
+@property (nonatomic, strong) NSArray * _Nullable parts;
 
 @end
 
@@ -706,7 +570,7 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 @property (nonatomic, strong) NSString * _Nullable ETag;
 
 /**
- Part number that identifies the part. This is a positive integer between 1 and 10,000.
+ Part number that identifies the part.
  */
 @property (nonatomic, strong) NSNumber * _Nullable partNumber;
 
@@ -737,7 +601,7 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 
 
 /**
- Specifies the region where the bucket will be created. If you don't specify a region, the bucket will be created in US Standard.
+ Specifies the region where the bucket will be created.
  */
 @property (nonatomic, assign) AWSS3BucketLocationConstraint locationConstraint;
 
@@ -811,16 +675,6 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 
 
 /**
- Date when multipart upload will become eligible for abort operation by lifecycle.
- */
-@property (nonatomic, strong) NSDate * _Nullable abortDate;
-
-/**
- Id of the lifecycle rule that makes a multipart upload eligible for abort operation.
- */
-@property (nonatomic, strong) NSString * _Nullable abortRuleId;
-
-/**
  Name of the bucket to which the multipart upload was initiated.
  */
 @property (nonatomic, strong) NSString * _Nullable bucket;
@@ -829,11 +683,6 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
  Object key for which the multipart upload was initiated.
  */
 @property (nonatomic, strong) NSString * _Nullable key;
-
-/**
- If present, indicates that the requester was successfully charged for the request.
- */
-@property (nonatomic, assign) AWSS3RequestCharged requestCharged;
 
 /**
  If server-side encryption with a customer-provided encryption key was requested, the response will include this header confirming the encryption algorithm used.
@@ -936,20 +785,15 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 /**
  A map of metadata to store with the object in S3.
  */
-@property (nonatomic, strong) NSDictionary<NSString *, NSString *> * _Nullable metadata;
+@property (nonatomic, strong) NSDictionary * _Nullable metadata;
 
 /**
- Confirms that the requester knows that she or he will be charged for the request. Bucket owners need not specify this parameter in their requests. Documentation on downloading objects from requester pays buckets can be found at http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
- */
-@property (nonatomic, assign) AWSS3RequestPayer requestPayer;
-
-/**
- Specifies the algorithm to use to when encrypting the object (e.g., AES256).
+ Specifies the algorithm to use to when encrypting the object (e.g., AES256, aws:kms).
  */
 @property (nonatomic, strong) NSString * _Nullable SSECustomerAlgorithm;
 
 /**
- Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; Amazon does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-side​-encryption​-customer-algorithm header.
+ Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; Amazon does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-side&#x200B;-encryption&#x200B;-customer-algorithm header.
  */
 @property (nonatomic, strong) NSString * _Nullable SSECustomerKey;
 
@@ -1010,19 +854,6 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
  
  */
 @interface AWSS3DeleteBucketPolicyRequest : AWSRequest
-
-
-/**
- 
- */
-@property (nonatomic, strong) NSString * _Nullable bucket;
-
-@end
-
-/**
- 
- */
-@interface AWSS3DeleteBucketReplicationRequest : AWSRequest
 
 
 /**
@@ -1116,11 +947,6 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 @property (nonatomic, strong) NSNumber * _Nullable deleteMarker;
 
 /**
- If present, indicates that the requester was successfully charged for the request.
- */
-@property (nonatomic, assign) AWSS3RequestCharged requestCharged;
-
-/**
  Returns the version ID of the delete marker created as a result of the DELETE operation.
  */
 @property (nonatomic, strong) NSString * _Nullable versionId;
@@ -1149,11 +975,6 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 @property (nonatomic, strong) NSString * _Nullable MFA;
 
 /**
- Confirms that the requester knows that she or he will be charged for the request. Bucket owners need not specify this parameter in their requests. Documentation on downloading objects from requester pays buckets can be found at http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
- */
-@property (nonatomic, assign) AWSS3RequestPayer requestPayer;
-
-/**
  VersionId used to reference a specific version of the object.
  */
 @property (nonatomic, strong) NSString * _Nullable versionId;
@@ -1169,17 +990,12 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 /**
  
  */
-@property (nonatomic, strong) NSArray<AWSS3DeletedObject *> * _Nullable deleted;
+@property (nonatomic, strong) NSArray * _Nullable deleted;
 
 /**
  
  */
-@property (nonatomic, strong) NSArray<AWSS3Error *> * _Nullable errors;
-
-/**
- If present, indicates that the requester was successfully charged for the request.
- */
-@property (nonatomic, assign) AWSS3RequestCharged requestCharged;
+@property (nonatomic, strong) NSArray * _Nullable errors;
 
 @end
 
@@ -1203,11 +1019,6 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
  
  */
 @property (nonatomic, strong) AWSS3Remove * _Nullable remove;
-
-/**
- Confirms that the requester knows that she or he will be charged for the request. Bucket owners need not specify this parameter in their requests. Documentation on downloading objects from requester pays buckets can be found at http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
- */
-@property (nonatomic, assign) AWSS3RequestPayer requestPayer;
 
 @end
 
@@ -1236,24 +1047,6 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
  
  */
 @property (nonatomic, strong) NSString * _Nullable versionId;
-
-@end
-
-/**
- 
- */
-@interface AWSS3Destination : AWSModel
-
-
-/**
- Amazon resource name (ARN) of the bucket where you want Amazon S3 to store replicas of the object identified by the rule.
- */
-@property (nonatomic, strong) NSString * _Nullable bucket;
-
-/**
- The class of storage used to store the object.
- */
-@property (nonatomic, assign) AWSS3StorageClass storageClass;
 
 @end
 
@@ -1299,50 +1092,6 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 @end
 
 /**
- Container for key value pair that defines the criteria for the filter rule.
- */
-@interface AWSS3FilterRule : AWSModel
-
-
-/**
- Object key name prefix or suffix identifying one or more objects to which the filtering rule applies. Maximum prefix length can be up to 1,024 characters. Overlapping prefixes and suffixes are not supported. For more information, go to <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html">Configuring Event Notifications</a> in the Amazon Simple Storage Service Developer Guide.
- */
-@property (nonatomic, assign) AWSS3FilterRuleName name;
-
-/**
- 
- */
-@property (nonatomic, strong) NSString * _Nullable value;
-
-@end
-
-/**
- 
- */
-@interface AWSS3GetBucketAccelerateConfigurationOutput : AWSModel
-
-
-/**
- The accelerate configuration of the bucket.
- */
-@property (nonatomic, assign) AWSS3BucketAccelerateStatus status;
-
-@end
-
-/**
- 
- */
-@interface AWSS3GetBucketAccelerateConfigurationRequest : AWSRequest
-
-
-/**
- Name of the bucket for which the accelerate configuration is retrieved.
- */
-@property (nonatomic, strong) NSString * _Nullable bucket;
-
-@end
-
-/**
  
  */
 @interface AWSS3GetBucketAclOutput : AWSModel
@@ -1351,7 +1100,7 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 /**
  A list of grants.
  */
-@property (nonatomic, strong) NSArray<AWSS3Grant *> * _Nullable grants;
+@property (nonatomic, strong) NSArray * _Nullable grants;
 
 /**
  
@@ -1382,7 +1131,7 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 /**
  
  */
-@property (nonatomic, strong) NSArray<AWSS3CORSRule *> * _Nullable CORSRules;
+@property (nonatomic, strong) NSArray * _Nullable CORSRules;
 
 @end
 
@@ -1402,39 +1151,13 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 /**
  
  */
-@interface AWSS3GetBucketLifecycleConfigurationOutput : AWSModel
-
-
-/**
- 
- */
-@property (nonatomic, strong) NSArray<AWSS3LifecycleRule *> * _Nullable rules;
-
-@end
-
-/**
- 
- */
-@interface AWSS3GetBucketLifecycleConfigurationRequest : AWSRequest
-
-
-/**
- 
- */
-@property (nonatomic, strong) NSString * _Nullable bucket;
-
-@end
-
-/**
- 
- */
 @interface AWSS3GetBucketLifecycleOutput : AWSModel
 
 
 /**
  
  */
-@property (nonatomic, strong) NSArray<AWSS3Rule *> * _Nullable rules;
+@property (nonatomic, strong) NSArray * _Nullable rules;
 
 @end
 
@@ -1506,11 +1229,34 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 /**
  
  */
-@interface AWSS3GetBucketNotificationConfigurationRequest : AWSRequest
+@interface AWSS3GetBucketNotificationOutput : AWSModel
 
 
 /**
- Name of the bucket to get the notification configuration for.
+ 
+ */
+@property (nonatomic, strong) AWSS3CloudFunctionConfiguration * _Nullable cloudFunctionConfiguration;
+
+/**
+ 
+ */
+@property (nonatomic, strong) AWSS3QueueConfiguration * _Nullable queueConfiguration;
+
+/**
+ 
+ */
+@property (nonatomic, strong) AWSS3TopicConfiguration * _Nullable topicConfiguration;
+
+@end
+
+/**
+ 
+ */
+@interface AWSS3GetBucketNotificationRequest : AWSRequest
+
+
+/**
+ 
  */
 @property (nonatomic, strong) NSString * _Nullable bucket;
 
@@ -1533,32 +1279,6 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
  
  */
 @interface AWSS3GetBucketPolicyRequest : AWSRequest
-
-
-/**
- 
- */
-@property (nonatomic, strong) NSString * _Nullable bucket;
-
-@end
-
-/**
- 
- */
-@interface AWSS3GetBucketReplicationOutput : AWSModel
-
-
-/**
- Container for replication rules. You can add as many as 1,000 rules. Total replication configuration size can be up to 2 MB.
- */
-@property (nonatomic, strong) AWSS3ReplicationConfiguration * _Nullable replicationConfiguration;
-
-@end
-
-/**
- 
- */
-@interface AWSS3GetBucketReplicationRequest : AWSRequest
 
 
 /**
@@ -1603,7 +1323,7 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 /**
  
  */
-@property (nonatomic, strong) NSArray<AWSS3Tag *> * _Nullable tagSet;
+@property (nonatomic, strong) NSArray * _Nullable tagSet;
 
 @end
 
@@ -1675,7 +1395,7 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 /**
  
  */
-@property (nonatomic, strong) NSArray<AWSS3RoutingRule *> * _Nullable routingRules;
+@property (nonatomic, strong) NSArray * _Nullable routingRules;
 
 @end
 
@@ -1701,17 +1421,12 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 /**
  A list of grants.
  */
-@property (nonatomic, strong) NSArray<AWSS3Grant *> * _Nullable grants;
+@property (nonatomic, strong) NSArray * _Nullable grants;
 
 /**
  
  */
 @property (nonatomic, strong) AWSS3Owner * _Nullable owner;
-
-/**
- If present, indicates that the requester was successfully charged for the request.
- */
-@property (nonatomic, assign) AWSS3RequestCharged requestCharged;
 
 @end
 
@@ -1730,11 +1445,6 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
  
  */
 @property (nonatomic, strong) NSString * _Nullable key;
-
-/**
- Confirms that the requester knows that she or he will be charged for the request. Bucket owners need not specify this parameter in their requests. Documentation on downloading objects from requester pays buckets can be found at http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
- */
-@property (nonatomic, assign) AWSS3RequestPayer requestPayer;
 
 /**
  VersionId used to reference a specific version of the object.
@@ -1785,11 +1495,6 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 @property (nonatomic, strong) NSNumber * _Nullable contentLength;
 
 /**
- The portion of the object returned in the response.
- */
-@property (nonatomic, strong) NSString * _Nullable contentRange;
-
-/**
  A standard MIME type describing the format of the object data.
  */
 @property (nonatomic, strong) NSString * _Nullable contentType;
@@ -1822,22 +1527,12 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 /**
  A map of metadata to store with the object in S3.
  */
-@property (nonatomic, strong) NSDictionary<NSString *, NSString *> * _Nullable metadata;
+@property (nonatomic, strong) NSDictionary * _Nullable metadata;
 
 /**
  This is set to the number of metadata entries not returned in x-amz-meta headers. This can happen if you create metadata using an API like SOAP that supports more flexible metadata than the REST API. For example, using SOAP, you can create metadata whose values are not legal HTTP headers.
  */
 @property (nonatomic, strong) NSNumber * _Nullable missingMeta;
-
-/**
- 
- */
-@property (nonatomic, assign) AWSS3ReplicationStatus replicationStatus;
-
-/**
- If present, indicates that the requester was successfully charged for the request.
- */
-@property (nonatomic, assign) AWSS3RequestCharged requestCharged;
 
 /**
  Provides information about object restoration operation and expiration time of the restored object copy.
@@ -1863,11 +1558,6 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
  The Server-side encryption algorithm used when storing this object in S3 (e.g., AES256, aws:kms).
  */
 @property (nonatomic, assign) AWSS3ServerSideEncryption serverSideEncryption;
-
-/**
- 
- */
-@property (nonatomic, assign) AWSS3StorageClass storageClass;
 
 /**
  Version of the object.
@@ -1923,11 +1613,6 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 @property (nonatomic, strong) NSString * _Nullable range;
 
 /**
- Confirms that the requester knows that she or he will be charged for the request. Bucket owners need not specify this parameter in their requests. Documentation on downloading objects from requester pays buckets can be found at http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
- */
-@property (nonatomic, assign) AWSS3RequestPayer requestPayer;
-
-/**
  Sets the Cache-Control header of the response.
  */
 @property (nonatomic, strong) NSString * _Nullable responseCacheControl;
@@ -1958,12 +1643,12 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 @property (nonatomic, strong) NSDate * _Nullable responseExpires;
 
 /**
- Specifies the algorithm to use to when encrypting the object (e.g., AES256).
+ Specifies the algorithm to use to when encrypting the object (e.g., AES256, aws:kms).
  */
 @property (nonatomic, strong) NSString * _Nullable SSECustomerAlgorithm;
 
 /**
- Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; Amazon does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-side​-encryption​-customer-algorithm header.
+ Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; Amazon does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-side&#x200B;-encryption&#x200B;-customer-algorithm header.
  */
 @property (nonatomic, strong) NSString * _Nullable SSECustomerKey;
 
@@ -1990,11 +1675,6 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
  */
 @property (nonatomic, strong) id _Nullable body;
 
-/**
- If present, indicates that the requester was successfully charged for the request.
- */
-@property (nonatomic, assign) AWSS3RequestCharged requestCharged;
-
 @end
 
 /**
@@ -2012,11 +1692,6 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
  
  */
 @property (nonatomic, strong) NSString * _Nullable key;
-
-/**
- Confirms that the requester knows that she or he will be charged for the request. Bucket owners need not specify this parameter in their requests. Documentation on downloading objects from requester pays buckets can be found at http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
- */
-@property (nonatomic, assign) AWSS3RequestPayer requestPayer;
 
 @end
 
@@ -2153,22 +1828,12 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 /**
  A map of metadata to store with the object in S3.
  */
-@property (nonatomic, strong) NSDictionary<NSString *, NSString *> * _Nullable metadata;
+@property (nonatomic, strong) NSDictionary * _Nullable metadata;
 
 /**
  This is set to the number of metadata entries not returned in x-amz-meta headers. This can happen if you create metadata using an API like SOAP that supports more flexible metadata than the REST API. For example, using SOAP, you can create metadata whose values are not legal HTTP headers.
  */
 @property (nonatomic, strong) NSNumber * _Nullable missingMeta;
-
-/**
- 
- */
-@property (nonatomic, assign) AWSS3ReplicationStatus replicationStatus;
-
-/**
- If present, indicates that the requester was successfully charged for the request.
- */
-@property (nonatomic, assign) AWSS3RequestCharged requestCharged;
 
 /**
  Provides information about object restoration operation and expiration time of the restored object copy.
@@ -2194,11 +1859,6 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
  The Server-side encryption algorithm used when storing this object in S3 (e.g., AES256, aws:kms).
  */
 @property (nonatomic, assign) AWSS3ServerSideEncryption serverSideEncryption;
-
-/**
- 
- */
-@property (nonatomic, assign) AWSS3StorageClass storageClass;
 
 /**
  Version of the object.
@@ -2254,17 +1914,12 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 @property (nonatomic, strong) NSString * _Nullable range;
 
 /**
- Confirms that the requester knows that she or he will be charged for the request. Bucket owners need not specify this parameter in their requests. Documentation on downloading objects from requester pays buckets can be found at http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
- */
-@property (nonatomic, assign) AWSS3RequestPayer requestPayer;
-
-/**
- Specifies the algorithm to use to when encrypting the object (e.g., AES256).
+ Specifies the algorithm to use to when encrypting the object (e.g., AES256, aws:kms).
  */
 @property (nonatomic, strong) NSString * _Nullable SSECustomerAlgorithm;
 
 /**
- Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; Amazon does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-side​-encryption​-customer-algorithm header.
+ Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; Amazon does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-side&#x200B;-encryption&#x200B;-customer-algorithm header.
  */
 @property (nonatomic, strong) NSString * _Nullable SSECustomerKey;
 
@@ -2312,35 +1967,6 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 @end
 
 /**
- Container for specifying the AWS Lambda notification configuration.
- Required parameters: [LambdaFunctionArn, Events]
- */
-@interface AWSS3LambdaFunctionConfiguration : AWSModel
-
-
-/**
- 
- */
-@property (nonatomic, strong) NSArray<NSString *> * _Nullable events;
-
-/**
- Container for object key name filtering rules. For information about key name filtering, go to <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html">Configuring Event Notifications</a> in the Amazon Simple Storage Service Developer Guide.
- */
-@property (nonatomic, strong) AWSS3NotificationConfigurationFilter * _Nullable filter;
-
-/**
- Optional unique identifier for configurations in a notification configuration. If you don't provide one, Amazon S3 will assign an ID.
- */
-@property (nonatomic, strong) NSString * _Nullable identifier;
-
-/**
- Lambda cloud function ARN that Amazon S3 can invoke when it detects events of the specified type.
- */
-@property (nonatomic, strong) NSString * _Nullable lambdaFunctionArn;
-
-@end
-
-/**
  
  */
 @interface AWSS3LifecycleConfiguration : AWSModel
@@ -2349,7 +1975,7 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 /**
  
  */
-@property (nonatomic, strong) NSArray<AWSS3Rule *> * _Nullable rules;
+@property (nonatomic, strong) NSArray * _Nullable rules;
 
 @end
 
@@ -2369,59 +1995,6 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
  */
 @property (nonatomic, strong) NSNumber * _Nullable days;
 
-/**
- Indicates whether Amazon S3 will remove a delete marker with no noncurrent versions. If set to true, the delete marker will be expired; if set to false the policy takes no action. This cannot be specified with Days or Date in a Lifecycle Expiration Policy.
- */
-@property (nonatomic, strong) NSNumber * _Nullable expiredObjectDeleteMarker;
-
-@end
-
-/**
- 
- */
-@interface AWSS3LifecycleRule : AWSModel
-
-
-/**
- Specifies the days since the initiation of an Incomplete Multipart Upload that Lifecycle will wait before permanently removing all parts of the upload.
- */
-@property (nonatomic, strong) AWSS3AbortIncompleteMultipartUpload * _Nullable abortIncompleteMultipartUpload;
-
-/**
- 
- */
-@property (nonatomic, strong) AWSS3LifecycleExpiration * _Nullable expiration;
-
-/**
- Unique identifier for the rule. The value cannot be longer than 255 characters.
- */
-@property (nonatomic, strong) NSString * _Nullable identifier;
-
-/**
- Specifies when noncurrent object versions expire. Upon expiration, Amazon S3 permanently deletes the noncurrent object versions. You set this lifecycle configuration action on a bucket that has versioning enabled (or suspended) to request that Amazon S3 delete noncurrent object versions at a specific period in the object's lifetime.
- */
-@property (nonatomic, strong) AWSS3NoncurrentVersionExpiration * _Nullable noncurrentVersionExpiration;
-
-/**
- 
- */
-@property (nonatomic, strong) NSArray<AWSS3NoncurrentVersionTransition *> * _Nullable noncurrentVersionTransitions;
-
-/**
- Prefix identifying one or more objects to which the rule applies.
- */
-@property (nonatomic, strong) NSString * _Nullable prefix;
-
-/**
- If 'Enabled', the rule is currently being applied. If 'Disabled', the rule is not currently being applied.
- */
-@property (nonatomic, assign) AWSS3ExpirationStatus status;
-
-/**
- 
- */
-@property (nonatomic, strong) NSArray<AWSS3Transition *> * _Nullable transitions;
-
 @end
 
 /**
@@ -2433,7 +2006,7 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 /**
  
  */
-@property (nonatomic, strong) NSArray<AWSS3Bucket *> * _Nullable buckets;
+@property (nonatomic, strong) NSArray * _Nullable buckets;
 
 /**
  
@@ -2456,7 +2029,7 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 /**
  
  */
-@property (nonatomic, strong) NSArray<AWSS3CommonPrefix *> * _Nullable commonPrefixes;
+@property (nonatomic, strong) NSArray * _Nullable commonPrefixes;
 
 /**
  
@@ -2506,7 +2079,7 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 /**
  
  */
-@property (nonatomic, strong) NSArray<AWSS3MultipartUpload *> * _Nullable uploads;
+@property (nonatomic, strong) NSArray * _Nullable uploads;
 
 @end
 
@@ -2562,12 +2135,12 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 /**
  
  */
-@property (nonatomic, strong) NSArray<AWSS3CommonPrefix *> * _Nullable commonPrefixes;
+@property (nonatomic, strong) NSArray * _Nullable commonPrefixes;
 
 /**
  
  */
-@property (nonatomic, strong) NSArray<AWSS3DeleteMarkerEntry *> * _Nullable deleteMarkers;
+@property (nonatomic, strong) NSArray * _Nullable deleteMarkers;
 
 /**
  
@@ -2622,7 +2195,7 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 /**
  
  */
-@property (nonatomic, strong) NSArray<AWSS3ObjectVersion *> * _Nullable versions;
+@property (nonatomic, strong) NSArray * _Nullable versions;
 
 @end
 
@@ -2678,12 +2251,12 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 /**
  
  */
-@property (nonatomic, strong) NSArray<AWSS3CommonPrefix *> * _Nullable commonPrefixes;
+@property (nonatomic, strong) NSArray * _Nullable commonPrefixes;
 
 /**
  
  */
-@property (nonatomic, strong) NSArray<AWSS3Object *> * _Nullable contents;
+@property (nonatomic, strong) NSArray * _Nullable contents;
 
 /**
  
@@ -2768,134 +2341,8 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 /**
  
  */
-@interface AWSS3ListObjectsV2Output : AWSModel
-
-
-/**
- CommonPrefixes contains all (if there are any) keys between Prefix and the next occurrence of the string specified by delimiter
- */
-@property (nonatomic, strong) NSArray<AWSS3CommonPrefix *> * _Nullable commonPrefixes;
-
-/**
- Metadata about each object returned.
- */
-@property (nonatomic, strong) NSArray<AWSS3Object *> * _Nullable contents;
-
-/**
- ContinuationToken indicates Amazon S3 that the list is being continued on this bucket with a token. ContinuationToken is obfuscated and is not a real key
- */
-@property (nonatomic, strong) NSString * _Nullable continuationToken;
-
-/**
- A delimiter is a character you use to group keys.
- */
-@property (nonatomic, strong) NSString * _Nullable delimiter;
-
-/**
- Encoding type used by Amazon S3 to encode object keys in the response.
- */
-@property (nonatomic, assign) AWSS3EncodingType encodingType;
-
-/**
- A flag that indicates whether or not Amazon S3 returned all of the results that satisfied the search criteria.
- */
-@property (nonatomic, strong) NSNumber * _Nullable isTruncated;
-
-/**
- KeyCount is the number of keys returned with this request. KeyCount will always be less than equals to MaxKeys field. Say you ask for 50 keys, your result will include less than equals 50 keys
- */
-@property (nonatomic, strong) NSNumber * _Nullable keyCount;
-
-/**
- Sets the maximum number of keys returned in the response. The response might contain fewer keys but will never contain more.
- */
-@property (nonatomic, strong) NSNumber * _Nullable maxKeys;
-
-/**
- Name of the bucket to list.
- */
-@property (nonatomic, strong) NSString * _Nullable name;
-
-/**
- NextContinuationToken is sent when isTruncated is true which means there are more keys in the bucket that can be listed. The next list requests to Amazon S3 can be continued with this NextContinuationToken. NextContinuationToken is obfuscated and is not a real key
- */
-@property (nonatomic, strong) NSString * _Nullable nextContinuationToken;
-
-/**
- Limits the response to keys that begin with the specified prefix.
- */
-@property (nonatomic, strong) NSString * _Nullable prefix;
-
-/**
- StartAfter is where you want Amazon S3 to start listing from. Amazon S3 starts listing after this specified key. StartAfter can be any key in the bucket
- */
-@property (nonatomic, strong) NSString * _Nullable startAfter;
-
-@end
-
-/**
- 
- */
-@interface AWSS3ListObjectsV2Request : AWSRequest
-
-
-/**
- Name of the bucket to list.
- */
-@property (nonatomic, strong) NSString * _Nullable bucket;
-
-/**
- ContinuationToken indicates Amazon S3 that the list is being continued on this bucket with a token. ContinuationToken is obfuscated and is not a real key
- */
-@property (nonatomic, strong) NSString * _Nullable continuationToken;
-
-/**
- A delimiter is a character you use to group keys.
- */
-@property (nonatomic, strong) NSString * _Nullable delimiter;
-
-/**
- Encoding type used by Amazon S3 to encode object keys in the response.
- */
-@property (nonatomic, assign) AWSS3EncodingType encodingType;
-
-/**
- The owner field is not present in listV2 by default, if you want to return owner field with each key in the result then set the fetch owner field to true
- */
-@property (nonatomic, strong) NSNumber * _Nullable fetchOwner;
-
-/**
- Sets the maximum number of keys returned in the response. The response might contain fewer keys but will never contain more.
- */
-@property (nonatomic, strong) NSNumber * _Nullable maxKeys;
-
-/**
- Limits the response to keys that begin with the specified prefix.
- */
-@property (nonatomic, strong) NSString * _Nullable prefix;
-
-/**
- StartAfter is where you want Amazon S3 to start listing from. Amazon S3 starts listing after this specified key. StartAfter can be any key in the bucket
- */
-@property (nonatomic, strong) NSString * _Nullable startAfter;
-
-@end
-
-/**
- 
- */
 @interface AWSS3ListPartsOutput : AWSModel
 
-
-/**
- Date when multipart upload will become eligible for abort operation by lifecycle.
- */
-@property (nonatomic, strong) NSDate * _Nullable abortDate;
-
-/**
- Id of the lifecycle rule that makes a multipart upload eligible for abort operation.
- */
-@property (nonatomic, strong) NSString * _Nullable abortRuleId;
 
 /**
  Name of the bucket to which the multipart upload was initiated.
@@ -2940,12 +2387,7 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 /**
  
  */
-@property (nonatomic, strong) NSArray<AWSS3Part *> * _Nullable parts;
-
-/**
- If present, indicates that the requester was successfully charged for the request.
- */
-@property (nonatomic, assign) AWSS3RequestCharged requestCharged;
+@property (nonatomic, strong) NSArray * _Nullable parts;
 
 /**
  The class of storage used to store the object.
@@ -2986,11 +2428,6 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 @property (nonatomic, strong) NSNumber * _Nullable partNumberMarker;
 
 /**
- Confirms that the requester knows that she or he will be charged for the request. Bucket owners need not specify this parameter in their requests. Documentation on downloading objects from requester pays buckets can be found at http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
- */
-@property (nonatomic, assign) AWSS3RequestPayer requestPayer;
-
-/**
  Upload ID identifying the multipart upload whose parts are being listed.
  */
 @property (nonatomic, strong) NSString * _Nullable uploadId;
@@ -3011,7 +2448,7 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 /**
  
  */
-@property (nonatomic, strong) NSArray<AWSS3TargetGrant *> * _Nullable targetGrants;
+@property (nonatomic, strong) NSArray * _Nullable targetGrants;
 
 /**
  This element lets you specify a prefix for the keys that the log files will be stored under.
@@ -3065,20 +2502,20 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 
 
 /**
- Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action. For information about the noncurrent days calculations, see <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html">How Amazon S3 Calculates When an Object Became Noncurrent</a> in the Amazon Simple Storage Service Developer Guide.
+ Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action. For information about the noncurrent days calculations, see <a href="/AmazonS3/latest/dev/s3-access-control.html">How Amazon S3 Calculates When an Object Became Noncurrent</a> in the Amazon Simple Storage Service Developer Guide.
  */
 @property (nonatomic, strong) NSNumber * _Nullable noncurrentDays;
 
 @end
 
 /**
- Container for the transition rule that describes when noncurrent objects transition to the STANDARD_IA or GLACIER storage class. If your bucket is versioning-enabled (or versioning is suspended), you can set this action to request that Amazon S3 transition noncurrent object versions to the STANDARD_IA or GLACIER storage class at a specific period in the object's lifetime.
+ Container for the transition rule that describes when noncurrent objects transition to the GLACIER storage class. If your bucket is versioning-enabled (or versioning is suspended), you can set this action to request that Amazon S3 transition noncurrent object versions to the GLACIER storage class at a specific period in the object's lifetime.
  */
 @interface AWSS3NoncurrentVersionTransition : AWSModel
 
 
 /**
- Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action. For information about the noncurrent days calculations, see <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html">How Amazon S3 Calculates When an Object Became Noncurrent</a> in the Amazon Simple Storage Service Developer Guide.
+ Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action. For information about the noncurrent days calculations, see <a href="/AmazonS3/latest/dev/s3-access-control.html">How Amazon S3 Calculates When an Object Became Noncurrent</a> in the Amazon Simple Storage Service Developer Guide.
  */
 @property (nonatomic, strong) NSNumber * _Nullable noncurrentDays;
 
@@ -3090,32 +2527,9 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 @end
 
 /**
- Container for specifying the notification configuration of the bucket. If this element is empty, notifications are turned off on the bucket.
+ 
  */
 @interface AWSS3NotificationConfiguration : AWSModel
-
-
-/**
- 
- */
-@property (nonatomic, strong) NSArray<AWSS3LambdaFunctionConfiguration *> * _Nullable lambdaFunctionConfigurations;
-
-/**
- 
- */
-@property (nonatomic, strong) NSArray<AWSS3QueueConfiguration *> * _Nullable queueConfigurations;
-
-/**
- 
- */
-@property (nonatomic, strong) NSArray<AWSS3TopicConfiguration *> * _Nullable topicConfigurations;
-
-@end
-
-/**
- 
- */
-@interface AWSS3NotificationConfigurationDeprecated : AWSModel
 
 
 /**
@@ -3126,25 +2540,12 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 /**
  
  */
-@property (nonatomic, strong) AWSS3QueueConfigurationDeprecated * _Nullable queueConfiguration;
+@property (nonatomic, strong) AWSS3QueueConfiguration * _Nullable queueConfiguration;
 
 /**
  
  */
-@property (nonatomic, strong) AWSS3TopicConfigurationDeprecated * _Nullable topicConfiguration;
-
-@end
-
-/**
- Container for object key name filtering rules. For information about key name filtering, go to <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html">Configuring Event Notifications</a> in the Amazon Simple Storage Service Developer Guide.
- */
-@interface AWSS3NotificationConfigurationFilter : AWSModel
-
-
-/**
- Container for object key name prefix and suffix filtering rules.
- */
-@property (nonatomic, strong) AWSS3S3KeyFilter * _Nullable key;
+@property (nonatomic, strong) AWSS3TopicConfiguration * _Nullable topicConfiguration;
 
 @end
 
@@ -3287,7 +2688,7 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 @property (nonatomic, strong) NSDate * _Nullable lastModified;
 
 /**
- Part number identifying the part. This is a positive integer between 1 and 10,000.
+ Part number identifying the part.
  */
 @property (nonatomic, strong) NSNumber * _Nullable partNumber;
 
@@ -3295,24 +2696,6 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
  Size of the uploaded part data.
  */
 @property (nonatomic, strong) NSNumber * _Nullable size;
-
-@end
-
-/**
- 
- */
-@interface AWSS3PutBucketAccelerateConfigurationRequest : AWSRequest
-
-
-/**
- Specifies the Accelerate Configuration you want to set for the bucket.
- */
-@property (nonatomic, strong) AWSS3AccelerateConfiguration * _Nullable accelerateConfiguration;
-
-/**
- Name of the bucket for which the accelerate configuration is set.
- */
-@property (nonatomic, strong) NSString * _Nullable bucket;
 
 @end
 
@@ -3395,24 +2778,6 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 /**
  
  */
-@interface AWSS3PutBucketLifecycleConfigurationRequest : AWSRequest
-
-
-/**
- 
- */
-@property (nonatomic, strong) NSString * _Nullable bucket;
-
-/**
- 
- */
-@property (nonatomic, strong) AWSS3BucketLifecycleConfiguration * _Nullable lifecycleConfiguration;
-
-@end
-
-/**
- 
- */
 @interface AWSS3PutBucketLifecycleRequest : AWSRequest
 
 
@@ -3459,24 +2824,6 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 /**
  
  */
-@interface AWSS3PutBucketNotificationConfigurationRequest : AWSRequest
-
-
-/**
- 
- */
-@property (nonatomic, strong) NSString * _Nullable bucket;
-
-/**
- Container for specifying the notification configuration of the bucket. If this element is empty, notifications are turned off on the bucket.
- */
-@property (nonatomic, strong) AWSS3NotificationConfiguration * _Nullable notificationConfiguration;
-
-@end
-
-/**
- 
- */
 @interface AWSS3PutBucketNotificationRequest : AWSRequest
 
 
@@ -3493,7 +2840,7 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 /**
  
  */
-@property (nonatomic, strong) AWSS3NotificationConfigurationDeprecated * _Nullable notificationConfiguration;
+@property (nonatomic, strong) AWSS3NotificationConfiguration * _Nullable notificationConfiguration;
 
 @end
 
@@ -3517,29 +2864,6 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
  The bucket policy as a JSON document.
  */
 @property (nonatomic, strong) NSString * _Nullable policy;
-
-@end
-
-/**
- 
- */
-@interface AWSS3PutBucketReplicationRequest : AWSRequest
-
-
-/**
- 
- */
-@property (nonatomic, strong) NSString * _Nullable bucket;
-
-/**
- 
- */
-@property (nonatomic, strong) NSString * _Nullable contentMD5;
-
-/**
- Container for replication rules. You can add as many as 1,000 rules. Total replication configuration size can be up to 2 MB.
- */
-@property (nonatomic, strong) AWSS3ReplicationConfiguration * _Nullable replicationConfiguration;
 
 @end
 
@@ -3643,19 +2967,6 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 /**
  
  */
-@interface AWSS3PutObjectAclOutput : AWSModel
-
-
-/**
- If present, indicates that the requester was successfully charged for the request.
- */
-@property (nonatomic, assign) AWSS3RequestCharged requestCharged;
-
-@end
-
-/**
- 
- */
 @interface AWSS3PutObjectAclRequest : AWSRequest
 
 
@@ -3709,16 +3020,6 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
  */
 @property (nonatomic, strong) NSString * _Nullable key;
 
-/**
- Confirms that the requester knows that she or he will be charged for the request. Bucket owners need not specify this parameter in their requests. Documentation on downloading objects from requester pays buckets can be found at http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
- */
-@property (nonatomic, assign) AWSS3RequestPayer requestPayer;
-
-/**
- VersionId used to reference a specific version of the object.
- */
-@property (nonatomic, strong) NSString * _Nullable versionId;
-
 @end
 
 /**
@@ -3736,11 +3037,6 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
  If the object expiration is configured, this will contain the expiration date (expiry-date) and rule ID (rule-id). The value of rule-id is URL encoded.
  */
 @property (nonatomic, strong) NSString * _Nullable expiration;
-
-/**
- If present, indicates that the requester was successfully charged for the request.
- */
-@property (nonatomic, assign) AWSS3RequestCharged requestCharged;
 
 /**
  If server-side encryption with a customer-provided encryption key was requested, the response will include this header confirming the encryption algorithm used.
@@ -3786,7 +3082,7 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 @property (nonatomic, strong) id _Nullable body;
 
 /**
- Name of the bucket to which the PUT operation was initiated.
+ 
  */
 @property (nonatomic, strong) NSString * _Nullable bucket;
 
@@ -3816,7 +3112,7 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 @property (nonatomic, strong) NSNumber * _Nullable contentLength;
 
 /**
- The base64-encoded 128-bit MD5 digest of the part data.
+ 
  */
 @property (nonatomic, strong) NSString * _Nullable contentMD5;
 
@@ -3851,27 +3147,22 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 @property (nonatomic, strong) NSString * _Nullable grantWriteACP;
 
 /**
- Object key for which the PUT operation was initiated.
+ 
  */
 @property (nonatomic, strong) NSString * _Nullable key;
 
 /**
  A map of metadata to store with the object in S3.
  */
-@property (nonatomic, strong) NSDictionary<NSString *, NSString *> * _Nullable metadata;
+@property (nonatomic, strong) NSDictionary * _Nullable metadata;
 
 /**
- Confirms that the requester knows that she or he will be charged for the request. Bucket owners need not specify this parameter in their requests. Documentation on downloading objects from requester pays buckets can be found at http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
- */
-@property (nonatomic, assign) AWSS3RequestPayer requestPayer;
-
-/**
- Specifies the algorithm to use to when encrypting the object (e.g., AES256).
+ Specifies the algorithm to use to when encrypting the object (e.g., AES256, aws:kms).
  */
 @property (nonatomic, strong) NSString * _Nullable SSECustomerAlgorithm;
 
 /**
- Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; Amazon does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-side​-encryption​-customer-algorithm header.
+ Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; Amazon does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-side&#x200B;-encryption&#x200B;-customer-algorithm header.
  */
 @property (nonatomic, strong) NSString * _Nullable SSECustomerKey;
 
@@ -3903,8 +3194,7 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 @end
 
 /**
- Container for specifying an configuration when you want Amazon S3 to publish events to an Amazon Simple Queue Service (Amazon SQS) queue.
- Required parameters: [QueueArn, Events]
+ 
  */
 @interface AWSS3QueueConfiguration : AWSModel
 
@@ -3912,43 +3202,15 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 /**
  
  */
-@property (nonatomic, strong) NSArray<NSString *> * _Nullable events;
-
-/**
- Container for object key name filtering rules. For information about key name filtering, go to <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html">Configuring Event Notifications</a> in the Amazon Simple Storage Service Developer Guide.
- */
-@property (nonatomic, strong) AWSS3NotificationConfigurationFilter * _Nullable filter;
-
-/**
- Optional unique identifier for configurations in a notification configuration. If you don't provide one, Amazon S3 will assign an ID.
- */
-@property (nonatomic, strong) NSString * _Nullable identifier;
-
-/**
- Amazon SQS queue ARN to which Amazon S3 will publish a message when it detects events of specified type.
- */
-@property (nonatomic, strong) NSString * _Nullable queueArn;
-
-@end
-
-/**
- 
- */
-@interface AWSS3QueueConfigurationDeprecated : AWSModel
-
-
-/**
- Bucket event for which to send notifications.
- */
 @property (nonatomic, assign) AWSS3Event event;
 
 /**
  
  */
-@property (nonatomic, strong) NSArray<NSString *> * _Nullable events;
+@property (nonatomic, strong) NSArray * _Nullable events;
 
 /**
- Optional unique identifier for configurations in a notification configuration. If you don't provide one, Amazon S3 will assign an ID.
+ 
  */
 @property (nonatomic, strong) NSString * _Nullable identifier;
 
@@ -4019,7 +3281,7 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 /**
  
  */
-@property (nonatomic, strong) NSArray<AWSS3ObjectIdentifier *> * _Nullable objects;
+@property (nonatomic, strong) NSArray * _Nullable objects;
 
 /**
  Element to enable quiet mode for the request. When you add this element, you must set its value to true.
@@ -4050,11 +3312,6 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 @property (nonatomic, strong) NSString * _Nullable replicateSourceVersionId;
 
 /**
- If present, indicates that the requester was successfully charged for the request.
- */
-@property (nonatomic, assign) AWSS3RequestCharged requestCharged;
-
-/**
  If server-side encryption with a customer-provided encryption key was requested, the response will include this header confirming the encryption algorithm used.
  */
 @property (nonatomic, strong) NSString * _Nullable SSECustomerAlgorithm;
@@ -4073,11 +3330,6 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
  The Server-side encryption algorithm used when storing this object in S3 (e.g., AES256, aws:kms).
  */
 @property (nonatomic, assign) AWSS3ServerSideEncryption serverSideEncryption;
-
-/**
- Version ID of the newly created copy.
- */
-@property (nonatomic, strong) NSString * _Nullable versionId;
 
 @end
 
@@ -4155,7 +3407,7 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 /**
  A map of metadata to store with the object in S3.
  */
-@property (nonatomic, strong) NSDictionary<NSString *, NSString *> * _Nullable metadata;
+@property (nonatomic, strong) NSDictionary * _Nullable metadata;
 
 /**
  Specifies whether the metadata is copied from the source object or replaced with metadata provided in the request.
@@ -4203,17 +3455,12 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 @property (nonatomic, strong) NSString * _Nullable replicateSourceSSECustomerKeyMD5;
 
 /**
- Confirms that the requester knows that she or he will be charged for the request. Bucket owners need not specify this parameter in their requests. Documentation on downloading objects from requester pays buckets can be found at http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
- */
-@property (nonatomic, assign) AWSS3RequestPayer requestPayer;
-
-/**
- Specifies the algorithm to use to when encrypting the object (e.g., AES256).
+ Specifies the algorithm to use to when encrypting the object (e.g., AES256, aws:kms).
  */
 @property (nonatomic, strong) NSString * _Nullable SSECustomerAlgorithm;
 
 /**
- Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; Amazon does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-side​-encryption​-customer-algorithm header.
+ Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; Amazon does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-side&#x200B;-encryption&#x200B;-customer-algorithm header.
  */
 @property (nonatomic, strong) NSString * _Nullable SSECustomerKey;
 
@@ -4281,53 +3528,6 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 @end
 
 /**
- Container for replication rules. You can add as many as 1,000 rules. Total replication configuration size can be up to 2 MB.
- Required parameters: [Role, Rules]
- */
-@interface AWSS3ReplicationConfiguration : AWSModel
-
-
-/**
- Amazon Resource Name (ARN) of an IAM role for Amazon S3 to assume when replicating the objects.
- */
-@property (nonatomic, strong) NSString * _Nullable role;
-
-/**
- Container for information about a particular replication rule. Replication configuration must have at least one rule and can contain up to 1,000 rules.
- */
-@property (nonatomic, strong) NSArray<AWSS3ReplicationRule *> * _Nullable rules;
-
-@end
-
-/**
- 
- */
-@interface AWSS3ReplicationRule : AWSModel
-
-
-/**
- 
- */
-@property (nonatomic, strong) AWSS3Destination * _Nullable destination;
-
-/**
- Unique identifier for the rule. The value cannot be longer than 255 characters.
- */
-@property (nonatomic, strong) NSString * _Nullable identifier;
-
-/**
- Object keyname prefix identifying one or more objects to which the rule applies. Maximum prefix length can be up to 1,024 characters. Overlapping prefixes are not supported.
- */
-@property (nonatomic, strong) NSString * _Nullable prefix;
-
-/**
- The rule is ignored if status is not Enabled.
- */
-@property (nonatomic, assign) AWSS3ReplicationRuleStatus status;
-
-@end
-
-/**
  
  */
 @interface AWSS3RequestPaymentConfiguration : AWSModel
@@ -4337,19 +3537,6 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
  Specifies who pays for the download and request fees.
  */
 @property (nonatomic, assign) AWSS3Payer payer;
-
-@end
-
-/**
- 
- */
-@interface AWSS3RestoreObjectOutput : AWSModel
-
-
-/**
- If present, indicates that the requester was successfully charged for the request.
- */
-@property (nonatomic, assign) AWSS3RequestCharged requestCharged;
 
 @end
 
@@ -4368,11 +3555,6 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
  
  */
 @property (nonatomic, strong) NSString * _Nullable key;
-
-/**
- Confirms that the requester knows that she or he will be charged for the request. Bucket owners need not specify this parameter in their requests. Documentation on downloading objects from requester pays buckets can be found at http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
- */
-@property (nonatomic, assign) AWSS3RequestPayer requestPayer;
 
 /**
  
@@ -4424,11 +3606,6 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 
 
 /**
- Specifies the days since the initiation of an Incomplete Multipart Upload that Lifecycle will wait before permanently removing all parts of the upload.
- */
-@property (nonatomic, strong) AWSS3AbortIncompleteMultipartUpload * _Nullable abortIncompleteMultipartUpload;
-
-/**
  
  */
 @property (nonatomic, strong) AWSS3LifecycleExpiration * _Nullable expiration;
@@ -4444,7 +3621,7 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 @property (nonatomic, strong) AWSS3NoncurrentVersionExpiration * _Nullable noncurrentVersionExpiration;
 
 /**
- Container for the transition rule that describes when noncurrent objects transition to the STANDARD_IA or GLACIER storage class. If your bucket is versioning-enabled (or versioning is suspended), you can set this action to request that Amazon S3 transition noncurrent object versions to the STANDARD_IA or GLACIER storage class at a specific period in the object's lifetime.
+ Container for the transition rule that describes when noncurrent objects transition to the GLACIER storage class. If your bucket is versioning-enabled (or versioning is suspended), you can set this action to request that Amazon S3 transition noncurrent object versions to the GLACIER storage class at a specific period in the object's lifetime.
  */
 @property (nonatomic, strong) AWSS3NoncurrentVersionTransition * _Nullable noncurrentVersionTransition;
 
@@ -4462,19 +3639,6 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
  
  */
 @property (nonatomic, strong) AWSS3Transition * _Nullable transition;
-
-@end
-
-/**
- Container for object key name prefix and suffix filtering rules.
- */
-@interface AWSS3S3KeyFilter : AWSModel
-
-
-/**
- A list of containers for key value pair that defines the criteria for the filter rule.
- */
-@property (nonatomic, strong) NSArray<AWSS3FilterRule *> * _Nullable filterRules;
 
 @end
 
@@ -4505,7 +3669,7 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 /**
  
  */
-@property (nonatomic, strong) NSArray<AWSS3Tag *> * _Nullable tagSet;
+@property (nonatomic, strong) NSArray * _Nullable tagSet;
 
 @end
 
@@ -4528,38 +3692,9 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 @end
 
 /**
- Container for specifying the configuration when you want Amazon S3 to publish events to an Amazon Simple Notification Service (Amazon SNS) topic.
- Required parameters: [TopicArn, Events]
+ 
  */
 @interface AWSS3TopicConfiguration : AWSModel
-
-
-/**
- 
- */
-@property (nonatomic, strong) NSArray<NSString *> * _Nullable events;
-
-/**
- Container for object key name filtering rules. For information about key name filtering, go to <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html">Configuring Event Notifications</a> in the Amazon Simple Storage Service Developer Guide.
- */
-@property (nonatomic, strong) AWSS3NotificationConfigurationFilter * _Nullable filter;
-
-/**
- Optional unique identifier for configurations in a notification configuration. If you don't provide one, Amazon S3 will assign an ID.
- */
-@property (nonatomic, strong) NSString * _Nullable identifier;
-
-/**
- Amazon SNS topic ARN to which Amazon S3 will publish a message when it detects events of specified type.
- */
-@property (nonatomic, strong) NSString * _Nullable topicArn;
-
-@end
-
-/**
- 
- */
-@interface AWSS3TopicConfigurationDeprecated : AWSModel
 
 
 /**
@@ -4570,10 +3705,10 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 /**
  
  */
-@property (nonatomic, strong) NSArray<NSString *> * _Nullable events;
+@property (nonatomic, strong) NSArray * _Nullable events;
 
 /**
- Optional unique identifier for configurations in a notification configuration. If you don't provide one, Amazon S3 will assign an ID.
+ 
  */
 @property (nonatomic, strong) NSString * _Nullable identifier;
 
@@ -4624,11 +3759,6 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 @property (nonatomic, strong) NSString * _Nullable replicateSourceVersionId;
 
 /**
- If present, indicates that the requester was successfully charged for the request.
- */
-@property (nonatomic, assign) AWSS3RequestCharged requestCharged;
-
-/**
  If server-side encryption with a customer-provided encryption key was requested, the response will include this header confirming the encryption algorithm used.
  */
 @property (nonatomic, strong) NSString * _Nullable SSECustomerAlgorithm;
@@ -4667,7 +3797,7 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 @property (nonatomic, strong) NSString * _Nullable key;
 
 /**
- Part number of part being copied. This is a positive integer between 1 and 10,000.
+ Part number of part being copied.
  */
 @property (nonatomic, strong) NSNumber * _Nullable partNumber;
 
@@ -4717,17 +3847,12 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 @property (nonatomic, strong) NSString * _Nullable replicateSourceSSECustomerKeyMD5;
 
 /**
- Confirms that the requester knows that she or he will be charged for the request. Bucket owners need not specify this parameter in their requests. Documentation on downloading objects from requester pays buckets can be found at http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
- */
-@property (nonatomic, assign) AWSS3RequestPayer requestPayer;
-
-/**
- Specifies the algorithm to use to when encrypting the object (e.g., AES256).
+ Specifies the algorithm to use to when encrypting the object (e.g., AES256, aws:kms).
  */
 @property (nonatomic, strong) NSString * _Nullable SSECustomerAlgorithm;
 
 /**
- Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; Amazon does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-side​-encryption​-customer-algorithm header. This must be the same encryption key specified in the initiate multipart upload request.
+ Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; Amazon does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-side&#x200B;-encryption&#x200B;-customer-algorithm header. This must be the same encryption key specified in the initiate multipart upload request.
  */
 @property (nonatomic, strong) NSString * _Nullable SSECustomerKey;
 
@@ -4753,11 +3878,6 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
  Entity tag for the uploaded object.
  */
 @property (nonatomic, strong) NSString * _Nullable ETag;
-
-/**
- If present, indicates that the requester was successfully charged for the request.
- */
-@property (nonatomic, assign) AWSS3RequestCharged requestCharged;
 
 /**
  If server-side encryption with a customer-provided encryption key was requested, the response will include this header confirming the encryption algorithm used.
@@ -4788,12 +3908,12 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 
 
 /**
- Object data.
+ 
  */
 @property (nonatomic, strong) id _Nullable body;
 
 /**
- Name of the bucket to which the multipart upload was initiated.
+ 
  */
 @property (nonatomic, strong) NSString * _Nullable bucket;
 
@@ -4803,32 +3923,27 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 @property (nonatomic, strong) NSNumber * _Nullable contentLength;
 
 /**
- The base64-encoded 128-bit MD5 digest of the part data.
+ 
  */
 @property (nonatomic, strong) NSString * _Nullable contentMD5;
 
 /**
- Object key for which the multipart upload was initiated.
+ 
  */
 @property (nonatomic, strong) NSString * _Nullable key;
 
 /**
- Part number of part being uploaded. This is a positive integer between 1 and 10,000.
+ Part number of part being uploaded.
  */
 @property (nonatomic, strong) NSNumber * _Nullable partNumber;
 
 /**
- Confirms that the requester knows that she or he will be charged for the request. Bucket owners need not specify this parameter in their requests. Documentation on downloading objects from requester pays buckets can be found at http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
- */
-@property (nonatomic, assign) AWSS3RequestPayer requestPayer;
-
-/**
- Specifies the algorithm to use to when encrypting the object (e.g., AES256).
+ Specifies the algorithm to use to when encrypting the object (e.g., AES256, aws:kms).
  */
 @property (nonatomic, strong) NSString * _Nullable SSECustomerAlgorithm;
 
 /**
- Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; Amazon does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-side​-encryption​-customer-algorithm header. This must be the same encryption key specified in the initiate multipart upload request.
+ Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; Amazon does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-side&#x200B;-encryption&#x200B;-customer-algorithm header. This must be the same encryption key specified in the initiate multipart upload request.
  */
 @property (nonatomic, strong) NSString * _Nullable SSECustomerKey;
 
@@ -4886,7 +4001,7 @@ typedef NS_ENUM(NSInteger, AWSS3Types) {
 /**
  
  */
-@property (nonatomic, strong) NSArray<AWSS3RoutingRule *> * _Nullable routingRules;
+@property (nonatomic, strong) NSArray * _Nullable routingRules;
 
 @end
 

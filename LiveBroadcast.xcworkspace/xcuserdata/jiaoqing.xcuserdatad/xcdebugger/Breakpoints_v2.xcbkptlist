@@ -49,38 +49,6 @@
             endingLineNumber = "345"
             landmarkName = "-getPreSignedURL:"
             landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__44-[AWSS3PreSignedURLBuilder getPreSignedURL:]_block_invoke"
-                  moduleName = "LiveBroadcast"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jiaoqing/LiveBroadcast/Pods/AWSS3/AWSS3/AWSS3PreSignedURL.m"
-                  timestampString = "492592747.178087"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "345"
-                  endingLineNumber = "345"
-                  offsetFromSymbolStart = "3640">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__44-[AWSS3PreSignedURLBuilder getPreSignedURL:]_block_invoke_2"
-                  moduleName = "LiveBroadcast"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jiaoqing/LiveBroadcast/Pods/AWSS3/AWSS3/AWSS3PreSignedURL.m"
-                  timestampString = "492592747.178325"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "345"
-                  endingLineNumber = "345"
-                  offsetFromSymbolStart = "24">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -106,7 +74,7 @@
                   moduleName = "LiveBroadcast"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/jiaoqing/LiveBroadcast/Pods/AWSCore/AWSCore/Authentication/AWSSignature.m"
-                  timestampString = "492592927.580432"
+                  timestampString = "492938521.787189"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "151"
@@ -121,7 +89,7 @@
                   moduleName = "LiveBroadcast"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/jiaoqing/LiveBroadcast/Pods/AWSCore/AWSCore/Authentication/AWSSignature.m"
-                  timestampString = "492592927.580631"
+                  timestampString = "492938521.787311"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "151"
@@ -145,38 +113,6 @@
             endingLineNumber = "536"
             landmarkName = "-interceptRequest:"
             landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[AWSSignatureV2Signer interceptRequest:]"
-                  moduleName = "LiveBroadcast"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jiaoqing/LiveBroadcast/Pods/AWSCore/AWSCore/Authentication/AWSSignature.m"
-                  timestampString = "492592747.179327"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "536"
-                  endingLineNumber = "536"
-                  offsetFromSymbolStart = "56">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__41-[AWSSignatureV2Signer interceptRequest:]_block_invoke"
-                  moduleName = "LiveBroadcast"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jiaoqing/LiveBroadcast/Pods/AWSCore/AWSCore/Authentication/AWSSignature.m"
-                  timestampString = "492592747.179442"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "536"
-                  endingLineNumber = "536"
-                  offsetFromSymbolStart = "28">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -202,7 +138,55 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LiveBroadcast/Libs/Kickflip/Inputs/KFRecorder.m"
-            timestampString = "492591856.320191"
+            timestampString = "492937668.896702"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "128"
+            endingLineNumber = "128"
+            landmarkName = "-encoder:encodedFrame:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LiveBroadcast/Libs/Kickflip/Inputs/KFRecorder.m"
+            timestampString = "492937668.896702"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "151"
+            endingLineNumber = "151"
+            landmarkName = "-captureOutput:didOutputSampleBuffer:fromConnection:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LiveBroadcast/Libs/Kickflip/Inputs/KFRecorder.m"
+            timestampString = "492937668.896702"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "153"
+            endingLineNumber = "153"
+            landmarkName = "-captureOutput:didOutputSampleBuffer:fromConnection:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LiveBroadcast/Libs/Kickflip/Inputs/KFRecorder.m"
+            timestampString = "492937668.896702"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "129"
@@ -218,59 +202,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LiveBroadcast/Libs/Kickflip/Inputs/KFRecorder.m"
-            timestampString = "492591915.437299"
+            timestampString = "492937668.896702"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "152"
-            endingLineNumber = "152"
-            landmarkName = "-captureOutput:didOutputSampleBuffer:fromConnection:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "LiveBroadcast/Libs/Kickflip/Inputs/KFRecorder.m"
-            timestampString = "492591948.251708"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "154"
-            endingLineNumber = "154"
-            landmarkName = "-captureOutput:didOutputSampleBuffer:fromConnection:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "LiveBroadcast/Libs/Kickflip/Inputs/KFRecorder.m"
-            timestampString = "492591957.851479"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "130"
-            endingLineNumber = "130"
-            landmarkName = "-encoder:encodedFrame:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "LiveBroadcast/Libs/Kickflip/Inputs/KFRecorder.m"
-            timestampString = "492591958.747327"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "133"
-            endingLineNumber = "133"
+            startingLineNumber = "132"
+            endingLineNumber = "132"
             landmarkName = "-encoder:encodedFrame:"
             landmarkType = "5">
          </BreakpointContent>
@@ -378,11 +314,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LiveBroadcast/Libs/Kickflip/Inputs/KFRecorder.m"
-            timestampString = "492592830.043941"
+            timestampString = "492937668.896702"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "226"
-            endingLineNumber = "226"
+            startingLineNumber = "225"
+            endingLineNumber = "225"
             landmarkName = "-startRecording"
             landmarkType = "5">
          </BreakpointContent>
@@ -394,12 +330,44 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LiveBroadcast/Libs/Kickflip/Inputs/KFRecorder.m"
-            timestampString = "492592876.274797"
+            timestampString = "492937668.896702"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "229"
-            endingLineNumber = "229"
+            startingLineNumber = "228"
+            endingLineNumber = "228"
             landmarkName = "-startRecording"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LiveBroadcast/Libs/Kickflip/Outputs/Muxers/HLS/KFHLSUploader.m"
+            timestampString = "492937325.711617"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "129"
+            endingLineNumber = "129"
+            landmarkName = "-uploadNextSegment"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LiveBroadcast/Libs/Kickflip/API/KFAPIClient.m"
+            timestampString = "492937662.076924"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "348"
+            endingLineNumber = "348"
+            landmarkName = "-startStreamWithParameters:callbackBlock:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

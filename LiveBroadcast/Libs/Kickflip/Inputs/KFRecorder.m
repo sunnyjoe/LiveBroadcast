@@ -56,7 +56,6 @@
     self.hlsWriter = [[KFHLSWriter alloc] initWithDirectoryPath:hlsDirectoryPath];
     [_hlsWriter addVideoStreamWithWidth:self.videoWidth height:self.videoHeight];
     [_hlsWriter addAudioStreamWithSampleRate:self.audioSampleRate];
-
 }
 
 - (void) setupEncoders {

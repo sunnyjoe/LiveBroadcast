@@ -8,8 +8,8 @@ target 'LiveBroadcast' do
   # Pods for LiveBroadcast
   pod 'CocoaLumberjack'
   pod 'AFNetworking'
-  pod 'AWSS3'
-  pod 'AFOAuth2Manager'
+  pod 'AWSS3', '2.3.2'
+  pod 'AFOAuth2Manager', '2.2.0'
   pod 'SSKeychain'
   pod 'FFmpegWrapper'
   pod 'PureLayout', '~> 2.0'
