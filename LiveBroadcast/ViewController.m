@@ -34,8 +34,6 @@
             NSLog(@"successfully logged in existing user");
         }
     }];
-    
-   
 }
 
 -(void)viewDidAppear:(BOOL)animated{

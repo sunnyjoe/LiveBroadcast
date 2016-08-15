@@ -14,13 +14,6 @@
 		0F27C85E1D5AC0BA00AA8987 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F27C85D1D5AC0BA00AA8987 /* Assets.xcassets */; };
 		0F27C8611D5AC0BA00AA8987 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F27C85F1D5AC0BA00AA8987 /* LaunchScreen.storyboard */; };
 		0F27C86A1D5B105000AA8987 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F27C8691D5B105000AA8987 /* AVFoundation.framework */; };
-		0F27C8841D5B398A00AA8987 /* libavcodec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F27C87D1D5B398A00AA8987 /* libavcodec.a */; };
-		0F27C8851D5B398A00AA8987 /* libavdevice.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F27C87E1D5B398A00AA8987 /* libavdevice.a */; };
-		0F27C8861D5B398A00AA8987 /* libavfilter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F27C87F1D5B398A00AA8987 /* libavfilter.a */; };
-		0F27C8871D5B398A00AA8987 /* libavformat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F27C8801D5B398A00AA8987 /* libavformat.a */; };
-		0F27C8881D5B398A00AA8987 /* libavutil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F27C8811D5B398A00AA8987 /* libavutil.a */; };
-		0F27C8891D5B398A00AA8987 /* libswresample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F27C8821D5B398A00AA8987 /* libswresample.a */; };
-		0F27C88A1D5B398A00AA8987 /* libswscale.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F27C8831D5B398A00AA8987 /* libswscale.a */; };
 		0F27C9101D5B3C8100AA8987 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F27C90F1D5B3C8100AA8987 /* libz.tbd */; };
 		0F27C9121D5B3CA300AA8987 /* libbz2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F27C9111D5B3CA300AA8987 /* libbz2.tbd */; };
 		0F27C9141D5B3CA800AA8987 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F27C9131D5B3CA800AA8987 /* libiconv.tbd */; };
@@ -89,13 +82,6 @@
 		0F27C8601D5AC0BA00AA8987 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0F27C8621D5AC0BA00AA8987 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0F27C8691D5B105000AA8987 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		0F27C87D1D5B398A00AA8987 /* libavcodec.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libavcodec.a; sourceTree = "<group>"; };
-		0F27C87E1D5B398A00AA8987 /* libavdevice.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libavdevice.a; sourceTree = "<group>"; };
-		0F27C87F1D5B398A00AA8987 /* libavfilter.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libavfilter.a; sourceTree = "<group>"; };
-		0F27C8801D5B398A00AA8987 /* libavformat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libavformat.a; sourceTree = "<group>"; };
-		0F27C8811D5B398A00AA8987 /* libavutil.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libavutil.a; sourceTree = "<group>"; };
-		0F27C8821D5B398A00AA8987 /* libswresample.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libswresample.a; sourceTree = "<group>"; };
-		0F27C8831D5B398A00AA8987 /* libswscale.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libswscale.a; sourceTree = "<group>"; };
 		0F27C88D1D5B39DC00AA8987 /* avcodec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = avcodec.h; sourceTree = "<group>"; };
 		0F27C88E1D5B39DC00AA8987 /* avfft.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = avfft.h; sourceTree = "<group>"; };
 		0F27C88F1D5B39DC00AA8987 /* d3d11va.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = d3d11va.h; sourceTree = "<group>"; };
@@ -280,7 +266,7 @@
 		6D43FEFB1D5C2099008A1FC7 /* http.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = http.h; sourceTree = "<group>"; };
 		6D43FEFC1D5C2099008A1FC7 /* log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = log.h; sourceTree = "<group>"; };
 		6D43FEFD1D5C2099008A1FC7 /* rtmp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtmp.h; sourceTree = "<group>"; };
-		6D43FEFE1D5C20B3008A1FC7 /* librtmp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = librtmp.a; sourceTree = "<group>"; };
+		6D43FEFE1D5C20B3008A1FC7 /* librtmp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = librtmp.a; path = LiveBroadcast/Libs/librtmp.a; sourceTree = "<group>"; };
 		863A57FF338F35D14EDACDE0 /* libPods-LiveBroadcast.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LiveBroadcast.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		974B7D98461A99B790F6D0E9 /* Pods-LiveBroadcast.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiveBroadcast.release.xcconfig"; path = "Pods/Target Support Files/Pods-LiveBroadcast/Pods-LiveBroadcast.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -304,14 +290,7 @@
 				0F27C9141D5B3CA800AA8987 /* libiconv.tbd in Frameworks */,
 				0F27C9121D5B3CA300AA8987 /* libbz2.tbd in Frameworks */,
 				0F27C9101D5B3C8100AA8987 /* libz.tbd in Frameworks */,
-				0F27C8881D5B398A00AA8987 /* libavutil.a in Frameworks */,
-				0F27C8861D5B398A00AA8987 /* libavfilter.a in Frameworks */,
 				0F27C86A1D5B105000AA8987 /* AVFoundation.framework in Frameworks */,
-				0F27C8851D5B398A00AA8987 /* libavdevice.a in Frameworks */,
-				0F27C88A1D5B398A00AA8987 /* libswscale.a in Frameworks */,
-				0F27C8871D5B398A00AA8987 /* libavformat.a in Frameworks */,
-				0F27C8891D5B398A00AA8987 /* libswresample.a in Frameworks */,
-				0F27C8841D5B398A00AA8987 /* libavcodec.a in Frameworks */,
 				6D43FEFF1D5C20B3008A1FC7 /* librtmp.a in Frameworks */,
 				5BD29818C0A32FE8FBAF91BD /* libPods-LiveBroadcast.a in Frameworks */,
 			);
@@ -375,19 +354,6 @@
 			isa = PBXGroup;
 			children = (
 				6D43FE7F1D5C1E08008A1FC7 /* Kickflip */,
-				0F27C9131D5B3CA800AA8987 /* libiconv.tbd */,
-				0F27C9111D5B3CA300AA8987 /* libbz2.tbd */,
-				0F27C90F1D5B3C8100AA8987 /* libz.tbd */,
-				0F27C88B1D5B39DC00AA8987 /* include */,
-				0F27C87D1D5B398A00AA8987 /* libavcodec.a */,
-				0F27C87E1D5B398A00AA8987 /* libavdevice.a */,
-				0F27C87F1D5B398A00AA8987 /* libavfilter.a */,
-				6D43FEFE1D5C20B3008A1FC7 /* librtmp.a */,
-				0F27C8801D5B398A00AA8987 /* libavformat.a */,
-				0F27C8811D5B398A00AA8987 /* libavutil.a */,
-				0F27C8821D5B398A00AA8987 /* libswresample.a */,
-				0F27C8831D5B398A00AA8987 /* libswscale.a */,
-				0F27C8691D5B105000AA8987 /* AVFoundation.framework */,
 			);
 			name = Libs;
 			path = LiveBroadcast/Libs;
@@ -405,7 +371,8 @@
 				0F27C8EC1D5B39DC00AA8987 /* libswresample */,
 				0F27C8EF1D5B39DC00AA8987 /* libswscale */,
 			);
-			path = include;
+			name = include;
+			path = LiveBroadcast/Libs/include;
 			sourceTree = "<group>";
 		};
 		0F27C88C1D5B39DC00AA8987 /* libavcodec */ = {
@@ -758,6 +725,12 @@
 		A96CC93CEDA00623A6A67440 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0F27C9131D5B3CA800AA8987 /* libiconv.tbd */,
+				0F27C9111D5B3CA300AA8987 /* libbz2.tbd */,
+				0F27C90F1D5B3C8100AA8987 /* libz.tbd */,
+				0F27C88B1D5B39DC00AA8987 /* include */,
+				6D43FEFE1D5C20B3008A1FC7 /* librtmp.a */,
+				0F27C8691D5B105000AA8987 /* AVFoundation.framework */,
 				6D2B1D6B1D61A11700B07F30 /* libAFNetworking.a */,
 				6D2B1D6C1D61A11700B07F30 /* libAFOAuth2Manager.a */,
 				6D2B1D6D1D61A11700B07F30 /* libAWSCore.a */,

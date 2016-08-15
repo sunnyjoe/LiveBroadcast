@@ -1224,6 +1224,7 @@
 		3C2B701AC48A1A1281E2BC59F456064F /* FFmpeg */ = {
 			isa = PBXGroup;
 			children = (
+				2CFD8298ED890183E707E6F29FBA1EB3 /* Frameworks */,
 				88A60C702C6FD1E4F558CE88567BF9F8 /* precompiled */,
 			);
 			path = FFmpeg;
@@ -1499,7 +1500,6 @@
 				89BD8A0552B4E395A436605A892C338A /* vorbis_parser.h */,
 				18159ACB888F13E49D9684B602AB0B62 /* xtea.h */,
 				316D79A5C774145E4E3ACF8BAD98D342 /* xvmc.h */,
-				2CFD8298ED890183E707E6F29FBA1EB3 /* Frameworks */,
 			);
 			name = precompiled;
 			sourceTree = "<group>";
